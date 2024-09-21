@@ -44,4 +44,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function userScore()
+    {
+        return $this->hasMany(User_Score::class);
+    }
+    public function userAnswer()
+    {
+        return $this->hasMany(User_Answer::class);
+    }
+    public function userQuizzes()
+    {
+        return $this->belongsToMany(Quiz::class,'quizzes_users');
+    }
 }
