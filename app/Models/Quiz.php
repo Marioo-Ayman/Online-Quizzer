@@ -13,4 +13,19 @@ class Quiz extends Model
     {
         return $this->hasMany(User_Answer::class);
     }
+
+    protected $fillable = ['title', 'description', 'time_limit', 'user_id', 'topic'];
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
+
+
+    // Define the relationship with Topic
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
 }
