@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -14,10 +14,11 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Middleware\RoleMiddleware;
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 // Route::middleware('guest')->group(function () {
 //     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -57,10 +58,20 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.index');
+    // return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// admin logout
+    // Route::post('admin/login', [AdminController::class, 'index'])->name('admin.login');
+    // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+
 Route::middleware('auth')->group(function () {
+Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+
+
+    // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     // Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,7 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 
@@ -77,7 +88,10 @@ require __DIR__.'/auth.php';
 //     ->middleware('auth', 'is_admin:admin')
 //     ->name('admin.dashboard');
 
-Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth','role:admin')->name('admin.dashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('auth','role:admin')->name('admin.dashboard');
 
                     // rolemiddleware name
     // ->middleware(['auth', 'role:admin'])
+
+
+
