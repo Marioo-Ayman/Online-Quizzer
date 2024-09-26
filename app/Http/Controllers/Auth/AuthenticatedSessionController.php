@@ -33,6 +33,7 @@ class AuthenticatedSessionController extends Controller
         }
             //else this means he is a normal user
         return redirect()->intended(route('dashboard', absolute: false));
+        // return view('user.userDashboard');
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\RoleMiddleware;
 
 
@@ -60,7 +61,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('admin.index');
     // return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth' ,'verified'])->name('dashboard');
 
 
 // admin logout
@@ -93,5 +94,10 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('a
                     // rolemiddleware name
     // ->middleware(['auth', 'role:admin'])
 
+    Route::get('/user/show', [UserController::class, 'login'])->middleware('auth','role:user')->name('user.show');
+    Route::post('/user/login', [UserController::class, 'store'])->middleware('auth','role:user')->name('user.login');
+
+
+// ->middleware('auth','role:user')
 
 

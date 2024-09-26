@@ -5,7 +5,7 @@
         <!-- User details -->
         <div class="user-profile text-center mt-3">
             <div class="">
-                <img src="{{ Auth::user()->avatar }}" alt="" class="avatar-md rounded-circle">
+                <img src="{{ Auth::user()->image }}" alt="" class="avatar-md rounded-circle">
             </div>
             <div class="mt-3">
                 <h4 class="font-size-16 mb-1">{{ Auth::user()->name }}</h4>

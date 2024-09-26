@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
+class UserController extends Controller
+{
+    public function login(){
+
+        return view('user.index');
+    }
+
+    public function store(Request $request){
+
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required',
+        ]);
+
+        $credentials = [
+            'email'=>$request->email,
+            'password'=>$request->password,
+        ];
+        if(Auth::attempt($credentials, $request->remember_me)){
+            return view('user.userDashboard');
+        };
+        throw ValidationException::withMessages([
+            'email'=>['credentail false']
+        ]);
+
+        // dd($user);
+    //    Auth::login($user);
+
+    //    return view('user.userDashboard');
+    }
+
+}

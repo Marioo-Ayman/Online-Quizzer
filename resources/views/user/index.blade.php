@@ -1,3 +1,8 @@
+
+
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -38,10 +43,10 @@
                             </div>
                         </div>
 
-                        <h4 class="text-muted text-center"><b>Admin's Sign In</b></h4>
+                        <h4 class="text-muted text-center"><b>user's login</b></h4>
 
                         <div class="p-3">
-                            <form method="POST" class="form-horizontal mt-3" action="{{ route('login') }}">
+                            <form method="POST" class="form-horizontal mt-3" action="{{ route('user.login') }}">
                                 @csrf
                                 <div class="form-group mb-3 row">
                                     <div class="col-12">
