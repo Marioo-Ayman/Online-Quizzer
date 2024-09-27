@@ -38,7 +38,8 @@
                             </div>
                         </div>
 
-                        <h4 class="text-muted text-center"><b>Admin's Sign In</b></h4>
+                        {{-- <h4 class="text-muted text-center"><b>Admin's Sign In</b></h4> --}}
+                        <h4 class="text-muted text-center"><b>Log In</b></h4>
 
                         <div class="p-3">
                             <form method="POST" class="form-horizontal mt-3" action="{{ route('login') }}">

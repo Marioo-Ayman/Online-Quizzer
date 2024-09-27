@@ -96,6 +96,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('a
 
     Route::get('/user/show', [UserController::class, 'login'])->middleware('auth','role:user')->name('user.show');
     Route::post('/user/login', [UserController::class, 'store'])->middleware('auth','role:user')->name('user.login');
+    Route::get('/user/logout', [UserController::class, 'logout'])->middleware('auth','role:user')->name('user.logout');
 
 
 // ->middleware('auth','role:user')
