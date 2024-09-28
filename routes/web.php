@@ -29,3 +29,5 @@ Route::get("user_profile/email_edit/{user_id}",[UserProfileController::class,"em
 Route::post("user_profile/email_edit/{user_id}",[UserProfileController::class,"email_edit_function"])->name("email_edit_function");
 
 require __DIR__.'/auth.php';
+
+Route::view('test', 'test');
