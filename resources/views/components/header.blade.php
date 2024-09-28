@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <title>{{$title}}</title>
+    @if(!empty($cssLinks))
     @foreach ($cssLinks as $link)
         @php
             $filePath = public_path("CSS/{$link}.css");
@@ -14,8 +15,9 @@
             <script src="CSS/{{ $link }}.css"></script>
             @endif
     @endforeach
+    @endif
 </head>
-<body>
+<body class="{{$body_classes}}">
 
 <header class="relative">
     <div class="bg-white flex justify-between items-center px-12 py-2
@@ -40,6 +42,8 @@
             @if (session('user'))
                 <li class="hover:text-yellow-500"><a href="#">Profile</a></li>
             @endif
+            <li class="hover:text-yellow-500"><a href="#">Contact</a></li>
+            <li class="hover:text-yellow-500"><a href="#">About Us</a></li>
             <li class="cursor-pointer relative group">
                 <span class="hover:text-yellow-500">Topics
                 <i class="fa-solid fa-chevron-down text-xs ml-2 group-hover:hidden"></i>
@@ -53,8 +57,6 @@
                     <li class="hover:text-yellow-500"><a href="#">Science</a></li>
                 </ul>
             </li>
-            <li class="hover:text-yellow-500"><a href="#">Contact</a></li>
-            <li class="hover:text-yellow-500"><a href="#">About Us</a></li>
 
         </ul>
     </nav>

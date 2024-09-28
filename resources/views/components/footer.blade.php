@@ -95,6 +95,7 @@
     </div>
 </footer>
 {{-- js files --}}
+@if(!empty($jsLinks))
 @foreach ($jsLinks as $link)
     @php
         $filePath = public_path("JS/{$link}.js");
@@ -104,5 +105,6 @@
         @endif
 @endforeach
 <script src="JS/header.js"></script>
+@endif
 </body>
 </html>

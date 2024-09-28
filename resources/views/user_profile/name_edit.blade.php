@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User profile</title>
-    @vite('resources/css/app.css')
-</head>
-<body class="bg-cyan-800">
-<div class="max-w-md mx-auto mt-32 bg-white p-6 rounded-lg shadow-md" >
+@php
+    $title = "User profile";
+    $cssLinks = [];  // Your array of CSS links
+    $body_classes = "bg-cyan-800";
+@endphp
+
+<x-header :cssLinks="$cssLinks" :title="$title" :body_classes="$body_classes">
+    <x-slot name="body_classes">{{ $body_classes }}</x-slot>  {{-- Pass body_classes through a slot --}}
+</x-header>
+<div class="max-w-md mx-auto my-32 bg-white p-6 rounded-lg shadow-md" >
     <h1 class="text-2xl font-bold mb-4">Update Name</h1>
     
     <form action="{{route("name_edit_function",$user_id)}}" method="POST" >
@@ -35,5 +35,5 @@
 </div>
 
 
-</body>
-</html>
+@component("components.footer")
+    @endcomponent

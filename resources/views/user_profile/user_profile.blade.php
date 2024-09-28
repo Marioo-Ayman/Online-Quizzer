@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User profile</title>
-    @vite('resources/css/app.css')
-</head>
+@php
+    $title = "User profile";
+    $cssLinks = [];  // Your array of CSS links
+    $body_classes = "bg-cyan-800 flex-col align-center";
+@endphp
+
+<x-header :cssLinks="$cssLinks" :title="$title" :body_classes="$body_classes">
+    <x-slot name="body_classes">{{ $body_classes }}</x-slot>  {{-- Pass body_classes through a slot --}}
+</x-header>
 @if ($data->image=="/uploads/avatar.png")
 @php
 $src="/uploads/avatar.png";
@@ -15,17 +16,15 @@ $src="/uploads/avatar.png";
 $src="/uploads/{$data->image}";
 @endphp
 @endif
-
-<body class="bg-cyan-800 flex flex-warp justify-center ">
-    <div class="parent w-2/5 ">
+    <div class="parent w-2/5 mt-20" style="position:relative;left:50%;transform:translateX(-50%);margin-bottom:40px;">
         <div class="text mt-5 text-white">
             <h2 class="text-2xl">Your settings</h2>
             <p>Put a face to your name, edit your login details, and set preferences</p>
         </div>
         <div class="content p-5 bg-blue-200 rounded mt-5">
             <div class="logo_name flex  " >
-                <img class=" rounded-full w-16 h-16" src="{{$src}}"  alt="">
-                <div class="text mx-5">
+            <img class="w-16 h-16 rounded-full object-cover" src="{{ $src }}" alt="">
+            <div class="text mx-5">
                     <div class="name">{{$data->name}}</div>
                     <div class="joining_date">joining date : {{$data->created_at}}</div>
                 </div>
@@ -60,8 +59,9 @@ $src="/uploads/{$data->image}";
             </div>
         </div>
     </div>
-</body>
-</html>
+
+    @component("components.footer")
+    @endcomponent
 
 <style>
     @media (max-width:970px){
