@@ -32,6 +32,12 @@ class AdminController extends Controller
             // }
         }
 
+        public function profile(){
+
+            $id = Auth::user()->id;
+            $userData =User::findOrFail($id);
+            return view('admin.adminProfileView', compact('userData'));
+        }
 
 
 

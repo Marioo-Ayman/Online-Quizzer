@@ -38,7 +38,6 @@ Route::get('/', function () {
 //                 ->name('password.store');
 // });
 
-
 // Route::middleware('auth')->group(function () {
 //     Route::get('verify-email', EmailVerificationPromptController::class)
 //                 ->name('verification.notice');
@@ -69,7 +68,9 @@ Route::get('/dashboard', function () {
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
 Route::middleware('auth')->group(function () {
-Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+
 
 
     // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -97,6 +98,7 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('a
     Route::get('/user/show', [UserController::class, 'login'])->middleware('auth','role:user')->name('user.show');
     Route::post('/user/login', [UserController::class, 'store'])->middleware('auth','role:user')->name('user.login');
     Route::get('/user/logout', [UserController::class, 'logout'])->middleware('auth','role:user')->name('user.logout');
+
 
 
 // ->middleware('auth','role:user')

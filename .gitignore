@@ -19,7 +19,3 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
-
-/backend/images
-/backend/fonts
-/backend/libs
