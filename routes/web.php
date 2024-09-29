@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\UserProfileController;
 
 Route::get('/', function () {
@@ -9,10 +12,18 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::middleware('auth')->group(function () {
+    Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+
+
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -33,3 +44,11 @@ Route::controller(UserProfileController::class)->prefix("user_profile")->group(f
 require __DIR__.'/auth.php';
 
 Route::view('test', 'test');
+
+
+
+
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('auth','role:admin')->name('admin.dashboard');
+Route::get('/user/show', [UserController::class, 'login'])->middleware('auth','role:user')->name('user.show');
+Route::post('/user/login', [UserController::class, 'store'])->middleware('auth','role:user')->name('user.login');
+Route::get('/user/logout', [UserController::class, 'logout'])->middleware('auth','role:user')->name('user.logout');
