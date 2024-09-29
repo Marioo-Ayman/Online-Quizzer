@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< Updated upstream
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -16,11 +17,21 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\RoleMiddleware;
 
 
+=======
+use App\Http\Controllers\Admin\AdminDashboardController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+>>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Route::middleware('guest')->group(function () {
 //     Route::get('register', [RegisteredUserController::class, 'create'])
 //                 ->name('register');
@@ -38,6 +49,10 @@ Route::get('/', function () {
 //                 ->name('password.store');
 // });
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Route::middleware('auth')->group(function () {
 //     Route::get('verify-email', EmailVerificationPromptController::class)
 //                 ->name('verification.notice');
@@ -68,12 +83,15 @@ Route::get('/dashboard', function () {
     // Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
 Route::middleware('auth')->group(function () {
+<<<<<<< Updated upstream
     Route::get('admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
     Route::get('admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
 
 
     // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+=======
+>>>>>>> Stashed changes
 
     // Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -81,6 +99,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+<<<<<<< Updated upstream
 require __DIR__ . '/auth.php';
 
 
@@ -99,8 +118,8 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->middleware('a
     Route::post('/user/login', [UserController::class, 'store'])->middleware('auth','role:user')->name('user.login');
     Route::get('/user/logout', [UserController::class, 'logout'])->middleware('auth','role:user')->name('user.logout');
 
+ 
 
-
-// ->middleware('auth','role:user')
-
-
+=======
+require __DIR__.'/auth.php';
+>>>>>>> Stashed changes
