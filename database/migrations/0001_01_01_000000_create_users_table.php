@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+<<<<<<< Updated upstream
             $table->string('image')->default('/uploads/avatar.png');
+=======
+            // $table->string('avatar')->default('/uploads/avatar.png');
+>>>>>>> Stashed changes
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('is_admin', ['user', 'admin'])->default('user');

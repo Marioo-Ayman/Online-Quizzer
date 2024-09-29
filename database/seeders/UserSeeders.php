@@ -21,12 +21,21 @@ class UserSeeders extends Seeder
                 'is_admin'=>'admin',
                 'password'=>Hash::make('123456'),
             ],
+<<<<<<< Updated upstream
             // [
             //     'name'=>'User',
             //     'email'=>'user@gmail.com',
             //     'is_admin'=>'user',
             //     'password'=>Hash::make('123456'),
             // ],
+=======
+            [
+                'name'=>'User',
+                'email'=>'user@gmail.com',
+                'is_admin'=>'user',
+                'password'=>Hash::make('123456'),
+            ],
+>>>>>>> Stashed changes
         ]);
     }
 }
