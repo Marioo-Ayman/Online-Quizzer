@@ -15,13 +15,14 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-          }
+        }
     </style>
 </head>
 
 <body class="bg-gray-100 ">
     <div class="bg-overlay"></div>
-    <div class="wrapper-page  absolute top-0 left-0 w-full h-full flex justify-center items-center bg-cover bg-center"style="background-image: url('{{ asset('images/auth-bg.jpg') }}')">
+    <div
+        class="wrapper-page  absolute top-0 left-0 w-full h-full flex justify-center items-center bg-cover bg-center"style="background-image: url('{{ asset('images/auth-bg.jpg') }}')">
         <div class="container mx-auto">
             <div class="max-w-md mx-auto mt-8 bg-white rounded p-8">
                 <div class="text-center mb-4">
@@ -70,6 +71,12 @@
                             <button
                                 class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit">Log In</button>
+                            @guest
+
+                            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                            href="{{ route('register') }}">
+                            {{ __('Create new account?') }}
+                        </a>                            @endguest
                         </div>
                     </form>
                 </div>
