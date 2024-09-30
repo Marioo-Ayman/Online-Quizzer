@@ -19,15 +19,15 @@ Route::middleware('auth')->group(function () {
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::controller(UserProfileController::class)->prefix("user_profile")->group(function(){
-    Route::get("{user_id}",[UserProfileController::class,"user_profile_show"])->name("user_profile_show");
-    Route::get("image_edit/{user_id}",[UserProfileController::class,"image_edit_show"])->name("image_edit_show");
-    Route::post("image_edit/{user_id}",[UserProfileController::class,"image_edit_function"])->name("image_edit_function");
-    Route::get("phone_number_edit/{user_id}",[UserProfileController::class,"phone_number_edit_show"])->name("phone_number_edit_show");
-    Route::post("phone_number_edit/{user_id}",[UserProfileController::class,"phone_number_edit_function"])->name("phone_number_edit_function");
-    Route::get("name_edit/{user_id}",[UserProfileController::class,"name_edit_show"])->name("name_edit_show");
-    Route::post("name_edit/{user_id}",[UserProfileController::class,"name_edit_function"])->name("name_edit_function");
-    Route::get("email_edit/{user_id}",[UserProfileController::class,"email_edit_show"])->name("email_edit_show");
-    Route::post("email_edit/{user_id}",[UserProfileController::class,"email_edit_function"])->name("email_edit_function");
+    Route::get("/{user_id}","user_profile_show")->name("user_profile_show");
+    Route::get("image_edit/{user_id}","image_edit_show")->name("image_edit_show");
+    Route::post("image_edit/{user_id}","image_edit_function")->name("image_edit_function");
+    Route::get("phone_number_edit/{user_id}","phone_number_edit_show")->name("phone_number_edit_show");
+    Route::post("phone_number_edit/{user_id}","phone_number_edit_function")->name("phone_number_edit_function");
+    Route::get("name_edit/{user_id}","name_edit_show")->name("name_edit_show");
+    Route::post("name_edit/{user_id}","name_edit_function")->name("name_edit_function");
+    Route::get("email_edit/{user_id}","email_edit_show")->name("email_edit_show");
+    Route::post("email_edit/{user_id}","email_edit_function")->name("email_edit_function");
 });
 
 require __DIR__.'/auth.php';
