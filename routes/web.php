@@ -59,3 +59,7 @@ Route::post('/quiz/setup', [QuizController::class, 'setupQuiz'])->name('quiz.set
 
 Route::get('/quiz/create', [QuizController::class, 'createQuizForm'])->name('quiz.createForm');
 Route::post('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');
+<<<<<<< form-creation-branch
+=======
+
+>>>>>>> main
