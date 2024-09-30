@@ -104,7 +104,7 @@
         <script src="JS/{{ $link }}.js"></script>
         @endif
 @endforeach
-<script src="JS/header.js"></script>
 @endif
+<script src="../JS/header.js"></script>
 </body>
 </html>
