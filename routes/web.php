@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\QuizController;
 
 Route::get('/', function () {
     return view('welcome');
