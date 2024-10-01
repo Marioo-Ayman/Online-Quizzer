@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
+use function PHPUnit\Framework\returnValue;
+
 class AdminController extends Controller
 {
     function index(){
@@ -23,7 +25,7 @@ class AdminController extends Controller
 
             //  $user = User::get();
 
-            if(Auth::user()->is_admin === 'admin'){
+            if(Auth::user()->is_admin == "admin"){
 
                 return view('admin.index', ['user'=>$user]);
             }
@@ -121,6 +123,40 @@ class AdminController extends Controller
             Log::info("Email dispatched to queue.");
 
             return view('auth.email_message');
+        }
+
+        public function getAllUsers(){
+            // $users = User::all();
+            // $users = User::where('is_admin', '=', 'user')->get(); 
+
+
+
+            // $users = User::where('is_admin', '=', 'user')->with('userScore')->get();
+            $users = User::where('is_admin', '=', 'user')->with('userScore.quiz')->get();
+            // $numberOfUsers  = count($users);
+            return view('admin.showUsers', compact('users'));
+            // return view('admin.showUsers', ['users'=>$users, 'numberOfUsers'=>$numberOfUsers]);
+        }
+        public function search(Request $request){
+            $keyword  = $request->keyword;
+            $users = User::where('name', 'like', "%$keyword%")->get();
+            dd($users);
+            return response()->json($users);
+        }
+
+
+        public function getUser($id){
+            $user = User::find($id);
+            return view('admin.showSpecificUser', compact('user'));
+        }
+
+        public function countOfUsers(){
+            //  $userCount = User::where('is_admin', "user")->count(); // Count users
+            //   return view('admin.content', compact($userCount));
+            $userCount = User::where('is_admin', 'user')->count(); // Count users
+            dd($userCount);
+            return view('admin.content', ['userCount' => $userCount]); // Pass to view
+
         }
 
 }

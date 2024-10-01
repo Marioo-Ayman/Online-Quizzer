@@ -12,11 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quizzes', function (Blueprint $table) {
+
+
             $table->id();
-            $table->foreignId('user_id');
             $table->string('title')->nullable(false);
-            $table->string('description')->nullable(false);
+
+            $table->text('description')->nullable();
+            $table->integer('time_limit');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
+
+            // $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
