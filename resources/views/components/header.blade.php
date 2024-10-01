@@ -17,7 +17,8 @@
     @endforeach
     @endif
 </head>
-<body class="{{$body_classes}}">
+
+<body class="{{ $body_classes ?? '' }}">
 
 <header class="relative">
     <div class="bg-white flex justify-between items-center px-12 py-2
@@ -34,7 +35,7 @@
             @endif
         </div>
     </div>
-    <nav class="absolute md:relative w-[100%] bg-gray-800 text-white hidden md:block">
+    <nav class="absolute md:relative w-[100%] bg-gray-800 text-white hidden md:block z-10">
         <ul class="flex flex-col justify-center items-start gap-4 p-5
         md:flex-row md:justify-between md:items-center md:px-20 md:py-3
         xl:px-72">
@@ -49,7 +50,7 @@
                 <i class="fa-solid fa-chevron-down text-xs ml-2 group-hover:hidden"></i>
                 <i class="fa-solid fa-chevron-up text-xs ml-2 hidden group-hover:inline-block"></i>
                 </span>
-                
+
                 <ul class="bg-gray-800 absolute top-6 left-0 min-w-32 p-5 flex-col gap-4 hidden group-hover:flex hover:flex">
                     <li class="hover:text-yellow-500"><a href="#">Math</a></li>
                     <li class="hover:text-yellow-500"><a href="#">English</a></li>
