@@ -6,9 +6,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\SendEmail;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
@@ -156,8 +158,50 @@ class AdminController extends Controller
             $userCount = User::where('role', 'user')->count(); // Count users
             dd($userCount);
             return view('admin.content', ['userCount' => $userCount]); // Pass to view
-
         }
+
+
+
+
+
+        //////////////////////////////abanoub////////////////////////////////////
+        function all_quizes(){
+        $quizes=Quiz::where("user_id",1)->paginate(2);
+        return view("admin.all_quizes",["quizes"=>$quizes]);
+        }
+
+        public function show_quiz($quiz_id)
+         {
+            $studentsWithScores = DB::table('users_score')
+                ->join('users', 'users_score.user_id', '=', 'users.id')  
+                ->join('quizzes', 'users_score.quiz_id', '=', 'quizzes.id') 
+                ->where('users_score.quiz_id', $quiz_id)                 
+                ->select(
+                    'users_score.*', 
+                    'users.name', 
+                    'users.email', 
+                    'users.phone', 
+                    'users.image',
+                    'quizzes.title',         
+                    'quizzes.description'      
+                )
+                ->orderBy('users_score.user_score', 'desc')               
+                ->paginate(10);                                           
+            
+            return view("admin.show_quiz", ["students" => $studentsWithScores]);
+         }
+  
+
+
+         public function search_quiz(Request $request)
+         {
+            $result = Quiz::where('title', 'like', '%' . $request->input('search_quiz') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('search_quiz') . '%')
+            ->paginate(10);
+            return view('admin.all_quizes', ['quizes' => $result]);
+         }
+        
+         
 
 }
 
