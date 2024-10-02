@@ -12,17 +12,17 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['quiz_id', 'question_text'];
+
     public function questionQuiz()
     {
-        return $this->belongsToMany(Quiz::class,'questions_quizzes');
+        return $this->belongsTo(Quiz::class);
     }
 
     public function questionUserAnswer()
     {
         return $this->hasMany(User_Answer::class);
     }
-
-     protected $fillable = ['quiz_id', 'question_text'];
 
     public function questionAnswer()
     {

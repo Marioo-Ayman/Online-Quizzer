@@ -16,17 +16,6 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'name'=>'Admin',
-                'email'=>'admin@gmail.com',
-                'role'=>'admin',
-                'phone'=>'01550668031',
-                'password'=>Hash::make('123456'),
-            ],
-
-        ]);
-
-        User::insert([
-            [
                 'name'=>'student2',
                 'email'=>'student2@gmail.com',
                 'role'=>'user',

@@ -17,7 +17,6 @@
     @endforeach
     @endif
 </head>
-
 <body class="{{ $body_classes ?? '' }}">
 
 <header class="relative">

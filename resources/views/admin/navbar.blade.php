@@ -214,7 +214,7 @@
                 </div>
                 <div class="p-2 md:block text-left">
                     <h2 class="text-sm font-semibold text-gray-800">{{ Auth::user()->name }}</h2>
-                    <p class="text-xs text-gray-500">{{ Auth::user()->is_admin }}</p>
+                    <p class="text-xs text-gray-500">{{ Auth::user()->role }}</p>
                 </div>
             </button>
             <ul

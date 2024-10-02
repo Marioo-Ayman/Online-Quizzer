@@ -47,8 +47,9 @@
                 <div class="grid max-w-2xl mx-auto mt-8">
                     <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
 
+
                         <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                            src="{{ $userData->image }}" alt="Bordered avatar">
+                            src="{{ $user->image }}" alt="Bordered avatar">
 
                         <div class="flex flex-col space-y-5 sm:ml-8">
                             <button type="button"
@@ -71,7 +72,7 @@
                                     class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">User name</label>
                                 <input type="text" id="username"
                                     class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder="Your first name" value="{{ $userData->name }}" required>
+                                    placeholder="Your first name" value="{{ $user->name }}" required>
                             </div>
 
                             {{-- <div class="w-full">
@@ -91,44 +92,27 @@
                                 email</label>
                             <input type="email" id="email"
                                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                value="{{ $userData->email }}" placeholder="your.email@mail.com" required>
+                                value="{{ $user->email }}" placeholder="your.email@mail.com" required>
                         </div>
                         <div class="mb-2 sm:mb-6">
-                            <label for="phone"
+                            <label for="role"
                                 class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                 phone</label>
                             <input type="tel" id="phone"
                                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                value="{{ $userData->phone }}" placeholder="01234567811" required>
+                                value="{{ $user->phone }}" placeholder="01234567811" required>
                         </div>
 
-                        <div>
-                            <h2 class="font-bold underline py-2">Change Password</h2>
-                            <div class="mb-2 sm:mb-6">
-                                <label for="profession"
-                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Current
-                                    password</label>
-                                <input type="password" id="profession"
-                                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder="Current password" required>
-
-                            </div>
-                            <hr>
-                            <div class="mb-2 mt-3 sm:mb-6">
-                                <label for="newPassword"
-                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">New
-                                    password</label>
-                                <input type="password" id="newPassword"
-                                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder="your profession" required>
-                            </div>
-                            <label for="confirmNewPassword"
-                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Confirm New
-                                password</label>
-                            <input type="password" id="confirmNewPassword"
+                        <div class="mb-2 sm:mb-6">
+                            <label for="role"
+                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
+                                Role</label>
+                            <input type="tel" id="role"
                                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                placeholder="your profession" required>
+                                value="{{ $user->role }}" required>
                         </div>
+
+
 
                     </div>
                     {{-- <div class="mb-6">
@@ -139,11 +123,16 @@
                             placeholder="Write your bio here..."></textarea>
                     </div> --}}
 
-                    <div class="flex justify-end mt-2">
+                    <div class="flex justify-end mt-2 gap-4 justify-center align-middle space-x-20 ">
                         <button type="submit"
                             class="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Save</button>
-                    </div>
 
+                            <a  href="{{ route('admin.getAllUsers') }}"
+                            class="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">All Users</a>
+
+                        </div>
+                    <div class="flex justify-end mt-2">
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,20 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next, $role): Response
     public function handle(Request $request, Closure $next): Response
-    {// column table name
-        if (Auth::user()->role === 'user') {
+    {
+        if (Auth::user()->is_admin === 'admin') {
             // return to_route('admin.dashboard');
             return $next($request);
         }
         return redirect()->back();
-     }
+    }
 }

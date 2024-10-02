@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -9,10 +10,10 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function login(){
+    // public function login(){
 
-        return view('user.index');
-    }
+    //     return view('user.index');
+    // }
 
     public function store(Request $request){
 
@@ -45,9 +46,18 @@ class UserController extends Controller
 
         $request->session()->regenerateToken();
 
-        // return redirect('/');
- 
+        return redirect('/');
+
         // Auth::logout();
-        return redirect('/user/show');
+        // return redirect('/user/show');
+    }
+
+    protected $fillable = ['question_id', 'answer_text', 'is_correct'];
+
+    // protected $table = 'answers';
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
     }
 }
