@@ -136,113 +136,19 @@ class QuizController extends Controller
                     }
                 }
             } elseif ($questionData['type'] === 'true_false') {
-
-                foreach (['a', 'b'] as $key) {
-                    if (!empty($questionData['options'][$key])) {
-                        Answer::create([
-                            'question_id' => $question->id,
-                            'answer_text' => $questionData['options'][$key],
-                            'is_correct' => ($key == $questionData['correct']),
-                        ]);
-                    }
-                }
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer_text' => 'True',
+                    'is_correct' => ($questionData['correct'] === 'true'),
+                ]);
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer_text' => 'False',
+                    'is_correct' => ($questionData['correct'] === 'false'),
+                ]);
             }
         }
 
-        return redirect()->route('admin.quiz.selectForm')->with('success', 'Quiz created successfully!');
+        return redirect()->route('quiz.selectForm')->with('success', 'Quiz created successfully!');
     }
-
-    public function showQuizzes()
-    {
-        // Retrieve all quizzes from the database
-        $quizzes = Quiz::with(['user', 'topic'])->get(); // Eager load users and topics for display
-
-        return view('admin.quiz.show_quizzes', compact('quizzes'));
-    }
-
-    public function showQuiz($studentId, $quizId)
-    {
-        // Fetch the user by ID and check if the role is 'user' (student)
-        $student = User::find($studentId);
-
-        if (!$student || $student->role !== 'user') {
-            // Redirect if the user doesn't exist or isn't a student
-            return redirect()->route('user.quiz.selectForm')->withErrors('Unauthorized access or user not found.');
-        }
-
-        // Retrieve the quiz along with questions and answers
-        $quiz = Quiz::with(['questions.questionAnswer'])->find($quizId);
-
-
-
-        if (!$quiz) {
-            return redirect()->route('user.quiz.selectForm')->withErrors('Quiz not found.');
-        }
-
-
-        $adminId = $quiz->user_id;
-        $timeLimit = $quiz->time_limit;
-
-
-        return view('user.quiz.show', compact('quiz', 'adminId', 'quizId', 'studentId', 'timeLimit'));
-    }
-
-
-
-    public function submitQuiz(Request $request, $studentId, $quizId)
-{
-    $startTime = session()->get('quiz_start_time');
-    $timeLimitInSeconds = $request->input('time_limit') * 60;
-    $currentTime = now();
-
-    // Check if time limit is exceeded
-    if ($startTime && $currentTime->diffInSeconds($startTime) > $timeLimitInSeconds) {
-        return redirect()->route('user.quiz.show', [$studentId, $quizId])
-                         ->with('error', 'Time limit exceeded. Quiz was not submitted.');
-    }
-
-    // Existing quiz submission logic
-    $score = 0;
-    $questions = Quiz::find($quizId)->questions;
-
-    foreach ($questions as $question) {
-        $questionId = $question->id;
-        $selectedAnswer = $request->answers[$questionId] ?? 'false';
-
-        User_Answer::create([
-            'user_id' => $studentId,
-            'quiz_id' => $quizId,
-            'question_id' => $questionId,
-            'user_answer_value' => $selectedAnswer,
-        ]);
-
-        $correctAnswer = Answer::where('question_id', $questionId)
-                               ->where('is_correct', 1)
-                               ->first();
-
-        if ($correctAnswer && $correctAnswer->answer_text === $selectedAnswer) {
-            $score++;
-        }
-    }
-
-    User_Score::create([
-        'user_id' => $studentId,
-        'quiz_id' => $quizId,
-        'user_score' => $score,
-    ]);
-
-    return redirect()->route('user.quiz.show', [$studentId, $quizId])->with('score', $score);
-}
-
-public function retakeQuiz($studentId, $quizId)
-{
-
-    $quiz = Quiz::findOrFail($quizId);
-    $adminId = $quiz->user_id;
-    $timeLimit = $quiz->time_limit;
-
-
-    return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
-}
-
 }

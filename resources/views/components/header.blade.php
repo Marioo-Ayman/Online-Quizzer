@@ -12,12 +12,12 @@
             $filePath = public_path("CSS/{$link}.css");
         @endphp
             @if (file_exists($filePath))
-            <script src="CSS/{{ $link }}.css"></script>
+            <link rel="stylesheet" href="{{asset('CSS/' . $link  . '.css')}}">
             @endif
     @endforeach
     @endif
 </head>
-<body>
+<body class="{{ $body_classes ?? '' }}">
 
 <header class="relative">
     <div class="bg-white flex justify-between items-center px-12 py-2
@@ -30,11 +30,11 @@
             @if (session('user'))
                 <a href="#" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Logout</a>
             @else
-                <a href="#" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
+                <a href="/user/show" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
             @endif
         </div>
     </div>
-    <nav class="absolute md:relative w-[100%] bg-gray-800 text-white hidden md:block">
+    <nav class="absolute md:relative w-[100%] bg-gray-800 text-white hidden md:block z-10">
         <ul class="flex flex-col justify-center items-start gap-4 p-5
         md:flex-row md:justify-between md:items-center md:px-20 md:py-3
         xl:px-72">

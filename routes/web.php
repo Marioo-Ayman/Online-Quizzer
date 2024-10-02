@@ -5,15 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserProfileController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
+Route::get('/', [HomeController::class,'index']);
 
 Route::middleware('auth')->group(function () {
 
@@ -78,6 +74,11 @@ Route::get('/user/quiz/{studentId}/{quizId}/retake', [QuizController::class, 're
 
 
 
+Route::get('/quiz/create', [QuizController::class, 'createQuizForm'])->name('quiz.createForm');
+Route::post('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');
+
+
 Route::get('admin/dashboard/all_quizes',[AdminController::class,"all_quizes"])->name("admin.all_quizes");
 Route::post('admin/dashboard/all_quizes',[AdminController::class,"search_quiz"])->name("search_quiz");
 Route::get('admin/dashboard/all_quizes/show_quiz/{quiz_id}',[AdminController::class,"show_quiz"])->name("admin.show_quiz");
+
