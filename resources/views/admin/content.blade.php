@@ -36,12 +36,10 @@
             <div class="flex justify-between mb-4">
                 <div>
                     <div class="flex items-center mb-1">
-                        <div class="text-2xl font-semibold">100</div>
-                        <div
-                            class="p-1 rounded bg-emerald-500/10 text-emerald-500 text-[12px] font-semibold leading-none ml-2">
-                            +30%</div>
+                        <div class="text-2xl font-semibold">See Reports</div>
+                        
                     </div>
-                    <div class="text-sm font-medium text-gray-400">re</div>
+                    <div class="text-sm font-medium text-gray-400">about quizes</div>
                 </div>
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
@@ -63,7 +61,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="/dierenartsen" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <a href="{{route("admin.all_quizes")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
         </div>
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex justify-between mb-6">

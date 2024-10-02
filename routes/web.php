@@ -23,15 +23,15 @@ Route::middleware('auth')->group(function () {
 });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::controller(UserProfileController::class)->prefix("user_profile")->group(function () {
-    Route::get("/{user_id}", "user_profile_show")->name("user_profile_show");
-    Route::get("image_edit/{user_id}", "image_edit_show")->name("image_edit_show");
-    Route::post("image_edit/{user_id}", "image_edit_function")->name("image_edit_function");
-    Route::get("phone_number_edit/{user_id}", "phone_number_edit_show")->name("phone_number_edit_show");
-    Route::post("phone_number_edit/{user_id}", "phone_number_edit_function")->name("phone_number_edit_function");
-    Route::get("name_edit/{user_id}", "name_edit_show")->name("name_edit_show");
-    Route::post("name_edit/{user_id}", "name_edit_function")->name("name_edit_function");
-    Route::get("email_edit/{user_id}", "email_edit_show")->name("email_edit_show");
-    Route::post("email_edit/{user_id}", "email_edit_function")->name("email_edit_function");
+        Route::get("/{user_id}", "user_profile_show")->name("user_profile_show");
+        Route::get("image_edit/{user_id}", "image_edit_show")->name("image_edit_show");
+        Route::post("image_edit/{user_id}", "image_edit_function")->name("image_edit_function");
+        Route::get("phone_number_edit/{user_id}", "phone_number_edit_show")->name("phone_number_edit_show");
+        Route::post("phone_number_edit/{user_id}", "phone_number_edit_function")->name("phone_number_edit_function");
+        Route::get("name_edit/{user_id}", "name_edit_show")->name("name_edit_show");
+        Route::post("name_edit/{user_id}", "name_edit_function")->name("name_edit_function");
+        Route::get("email_edit/{user_id}", "email_edit_show")->name("email_edit_show");
+        Route::post("email_edit/{user_id}", "email_edit_function")->name("email_edit_function");
 });
 
 require __DIR__ . '/auth.php';
@@ -50,7 +50,7 @@ Route::controller(AdminController::class)->prefix('admin')->group(function () {
     Route::get('logout', 'AdminLogout')->middleware('auth')->name('admin.logout');
     Route::get('contact', 'contact_to_admin')->middleware('auth')->name('admin.contact');
 
-    Route::get('all_users', 'getAllUsers')->middleware('auth')->name('admin.getAllUsers');
+    Route::get( 'all_users', 'getAllUsers')->middleware('auth')->name('admin.getAllUsers');
 
     Route::get('all_users/search', 'search')->middleware('auth')->name('admin.getAllUsers.search');
     // Route::get('all_users/search/{keyword}','search')->middleware('auth')->name('admin.getAllUsers');
@@ -75,3 +75,9 @@ Route::get('/user/quiz/{studentId}/{quizId}', [QuizController::class, 'showQuiz'
 Route::post('/user/quiz/{studentId}/{quizId}/submit', [QuizController::class, 'submitQuiz'])->name('user.quiz.submit');
 Route::get('/user/quiz/{studentId}/{quizId}/retake', [QuizController::class, 'retakeQuiz'])->name('user.quiz.retake');
 
+
+
+
+Route::get('admin/dashboard/all_quizes',[AdminController::class,"all_quizes"])->name("admin.all_quizes");
+Route::post('admin/dashboard/all_quizes',[AdminController::class,"search_quiz"])->name("search_quiz");
+Route::get('admin/dashboard/all_quizes/show_quiz/{quiz_id}',[AdminController::class,"show_quiz"])->name("admin.show_quiz");
