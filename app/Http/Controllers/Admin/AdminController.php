@@ -17,26 +17,26 @@ use function PHPUnit\Framework\returnValue;
 class AdminController extends Controller
 {
     function index(){
-        // $is_admin = User::select('is_admin')->get();
+        // $role = User::select('role')->get();
         $user = User::all();
 
-        //   if($is_admin=== 'admin'){
+        //   if($role=== 'admin'){
             // return view('admin.dashboard.index');   // that is working
 
             //  $user = User::get();
 
-            if(Auth::user()->is_admin == "admin"){
+            if(Auth::user()->role == "admin"){
 
                 return view('admin.index', ['user'=>$user]);
             }
-            // if(Auth::user()->is_admin === 'user'){
+            // if(Auth::user()->role === 'user'){
             //     return view('user.userDashboard');
             // }
 
             return redirect()->back();
             // }else{
-            //     $is_admin = User::select('is_admin')->get();
-            //     if($is_admin ==='user'){
+            //     $role = User::select('role')->get();
+            //     if($role ==='user'){
 
             //         return view('view.dashboard');
             //     }
@@ -127,12 +127,12 @@ class AdminController extends Controller
 
         public function getAllUsers(){
             // $users = User::all();
-            // $users = User::where('is_admin', '=', 'user')->get(); 
+            // $users = User::where('role', '=', 'user')->get();
 
 
 
-            // $users = User::where('is_admin', '=', 'user')->with('userScore')->get();
-            $users = User::where('is_admin', '=', 'user')->with('userScore.quiz')->get();
+            // $users = User::where('role', '=', 'user')->with('userScore')->get();
+            $users = User::where('role', '=', 'user')->with('userScore.quiz')->get();
             // $numberOfUsers  = count($users);
             return view('admin.showUsers', compact('users'));
             // return view('admin.showUsers', ['users'=>$users, 'numberOfUsers'=>$numberOfUsers]);
@@ -151,9 +151,9 @@ class AdminController extends Controller
         }
 
         public function countOfUsers(){
-            //  $userCount = User::where('is_admin', "user")->count(); // Count users
+            //  $userCount = User::where('role', "user")->count(); // Count users
             //   return view('admin.content', compact($userCount));
-            $userCount = User::where('is_admin', 'user')->count(); // Count users
+            $userCount = User::where('role', 'user')->count(); // Count users
             dd($userCount);
             return view('admin.content', ['userCount' => $userCount]); // Pass to view
 

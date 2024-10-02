@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users_score', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('quiz_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // User who took the quiz
+            $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade'); //will be in an alter table
             $table->integer('user_score')->nullable(false);
             $table->timestamps();
         });

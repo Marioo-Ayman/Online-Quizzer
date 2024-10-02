@@ -9,6 +9,7 @@ class Topic extends Model
 {
     use HasFactory;
 
+
     protected $fillable = ['name'];
 
     // Define the relationship with Quiz
@@ -16,6 +17,5 @@ class Topic extends Model
     {
         return $this->hasMany(Quiz::class);
     }
-
 
 }

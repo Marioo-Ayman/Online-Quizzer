@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
-    @stack('style')
+    <title>{{ $title ?? 'Page Title' }}</title>
+    @vite(['resources/css/app.css', 'resources/css/custom.css']) <!-- Vite for assets -->
+    @if (isset($cssLinks))
+        @foreach ($cssLinks as $cssLink)
+            <link rel="stylesheet" href="{{ $cssLink }}">
+        @endforeach
+    @endif
 </head>
-
 <body>
+    <!-- Include the header component -->
+    <x-header :cssLinks="$cssLinks" :title="$title" />
 
-    @yield('content')
+    <!-- Main content section -->
+    <main>
+        @yield('content')
+    </main>
 
-    @stack('script')
+    @yield('scripts')
+
+    <!-- Include the footer component -->
+    <x-footer :jsLinks="$jsLinks" />
 </body>
-
 </html>

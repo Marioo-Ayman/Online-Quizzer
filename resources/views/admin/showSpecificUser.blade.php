@@ -95,7 +95,7 @@
                                 value="{{ $user->email }}" placeholder="your.email@mail.com" required>
                         </div>
                         <div class="mb-2 sm:mb-6">
-                            <label for="is_admin"
+                            <label for="role"
                                 class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                 phone</label>
                             <input type="tel" id="phone"
@@ -104,12 +104,12 @@
                         </div>
 
                         <div class="mb-2 sm:mb-6">
-                            <label for="is_admin"
+                            <label for="role"
                                 class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Your
                                 Role</label>
-                            <input type="tel" id="is_admin"
+                            <input type="tel" id="role"
                                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                value="{{ $user->is_admin }}" required>
+                                value="{{ $user->role }}" required>
                         </div>
 
 
