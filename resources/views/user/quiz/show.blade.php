@@ -12,10 +12,7 @@ $title = 'Quiz';
         <h2 class="text-xl font-bold mb-4">{{ $quiz->title }}</h2>
         <p class="mb-4">{{ $quiz->description }}</p>
 
-        <!-- Timer -->
-        @if (!session()->has('score'))
-        <div id="timer" class="text-red-600 font-bold mb-4"></div>
-        @endif
+
 
         <!-- Score Section -->
         @if(session()->has('score'))
@@ -30,7 +27,12 @@ $title = 'Quiz';
         </form>
         @endif
 
-        <!-- Quiz Form -->
+        <!-- Display Quiz Form -->
+        @if (!session()->has('score')) <!-- Only show the form if the score is not displayed -->
+
+        <!-- Timer -->
+        <div id="timer" class="text-red-600 font-bold mb-4"></div>
+
         <form id="quizForm" action="{{ route('user.quiz.submit', ['studentId' => $studentId, 'quizId' => $quizId]) }}" method="POST">
             @csrf
             <input type="hidden" name="admin_id" value="{{ $adminId }}">
@@ -50,8 +52,12 @@ $title = 'Quiz';
             </div>
             @endforeach
 
-            <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">Submit Answers</button>
+            <!-- Submit button hidden if score is shown -->
+            <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
+                Submit Answers
+            </button>
         </form>
+        @endif
 
         <!-- Timer Script -->
         @if (!session()->has('score'))
