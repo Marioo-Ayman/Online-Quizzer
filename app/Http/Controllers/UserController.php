@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -49,5 +50,14 @@ class UserController extends Controller
 
         // Auth::logout();
         // return redirect('/user/show');
+    }
+
+    protected $fillable = ['question_id', 'answer_text', 'is_correct'];
+
+    // protected $table = 'answers';
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
     }
 }

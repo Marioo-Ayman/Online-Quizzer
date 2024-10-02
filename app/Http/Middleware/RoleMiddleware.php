@@ -14,10 +14,10 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next, $is_admin): Response
+    // public function handle(Request $request, Closure $next, $role): Response
     public function handle(Request $request, Closure $next): Response
     {// column table name
-        if (Auth::user()->is_admin === 'user') {
+        if (Auth::user()->role === 'user') {
             // return to_route('admin.dashboard');
             return $next($request);
         }

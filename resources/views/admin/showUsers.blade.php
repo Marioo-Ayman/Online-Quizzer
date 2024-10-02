@@ -58,7 +58,7 @@
                         </tbody>
                     </table>
                 </td>
-                <td>{{ $user->is_admin }}</td>
+                <td>{{ $user->role }}</td>
                 <td>
                     <button class="rounded border-blue-600 px-5 py-3 text-white bg-blue-600 text-center">
                           <a href="{{ route('admin.getUser', $user->id) }}" class="btn">View</a>
@@ -147,7 +147,7 @@
                     // data: {
                     //     name: name,
                     //     email: email,
-                    //     is_admin: is_admin
+                    //     role: role
                     // },
                     success: function(data) {
 

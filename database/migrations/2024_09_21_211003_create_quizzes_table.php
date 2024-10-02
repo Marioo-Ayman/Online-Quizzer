@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('quizzes', function (Blueprint $table) {
 
 
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('time_limit');
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('topic_id')->constrained('topics')->onDelete('cascade');
             $table->timestamps();
 
             // $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
