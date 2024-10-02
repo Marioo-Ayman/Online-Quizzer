@@ -12,7 +12,7 @@
             $filePath = public_path("CSS/{$link}.css");
         @endphp
             @if (file_exists($filePath))
-            <script src="CSS/{{ $link }}.css"></script>
+            <link rel="stylesheet" href="{{asset('CSS/' . $link  . '.css')}}">
             @endif
     @endforeach
     @endif
@@ -31,7 +31,7 @@
             @if (session('user'))
                 <a href="#" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Logout</a>
             @else
-                <a href="#" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
+                <a href="/user/show" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
             @endif
         </div>
     </div>

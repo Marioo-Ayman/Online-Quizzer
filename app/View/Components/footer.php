@@ -14,7 +14,7 @@ class footer extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($jsLinks)
+    public function __construct($jsLinks = [])
     {
         // check all the file is exist
         foreach ($jsLinks as $jsLink) {

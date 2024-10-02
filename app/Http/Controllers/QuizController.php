@@ -125,4 +125,21 @@ class QuizController extends Controller
 
         return redirect()->route('quiz.selectForm')->with('success', 'Quiz created successfully!');
     }
+
+    public function show($id) {
+        $quiz = Quiz::find($id);
+        $questions = Question::where('quiz_id', '=', $quiz->id)->get();
+        $sz = count($questions);
+        for ($i = 0; $i < $sz; $i++) {
+            $answers[] = [Answer::where('question_id','=', $questions[$i]->id)->get()];
+        }
+        $topic = Topic::where('id', '=', $quiz->topic_id)->get();
+        return view('quiz/quiz', [
+            'quiz' => $quiz,
+            'topic' => $topic,
+            'questions'=> $questions,
+            'answers' => $answers
+        ]);
+    }
+
 }

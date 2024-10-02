@@ -14,7 +14,7 @@ class header extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($cssLinks, $title)
+    public function __construct($cssLinks = [], $title = "")
     {
         $this->cssLinks = $cssLinks;
         $this->title = $title;
