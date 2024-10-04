@@ -89,7 +89,7 @@
                     </ul>
                 </div>
             </div>
-            <a href="" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <a href="{{route("admin.quiz.selectForm")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
         </div>
     </div>
 
