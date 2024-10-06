@@ -1,7 +1,7 @@
 @php
     $title = "User profile";
     $cssLinks = [];  // Your array of CSS links
-    $body_classes = "bg-cyan-800 flex-col align-center";
+    $body_classes = "bg-gray-500 flex-col align-center";
 @endphp
 
 <x-header :cssLinks="$cssLinks" :title="$title" :body_classes="$body_classes">
@@ -21,7 +21,7 @@ $src="/uploads/{$data->image}";
             <h2 class="text-2xl">Your settings</h2>
             <p>Put a face to your name, edit your login details, and set preferences</p>
         </div>
-        <div class="content p-5 bg-blue-200 rounded mt-5">
+        <div class="content p-5 bg-gray-300 rounded mt-5">
             <div class="logo_name flex  " >
             <img class="w-16 h-16 rounded-full object-cover" src="{{ $src }}" alt="">
             <div class="text mx-5">
@@ -30,10 +30,10 @@ $src="/uploads/{$data->image}";
                 </div>
             </div>
             <div class="buttons  mt-5 ">
-                <a href="{{route( "image_edit_show","1")}}" class="	rounded border border-cyan-950 " style="padding:5px 20px">Edit Profile Image</a>
-                <a  href="{{route( "name_edit_show","1")}}" class="mr-8 bg-cyan-950	rounded text-white" style="padding:5px 20px">Edit Name</a>
+                <a href="{{route( "image_edit_show")}}" class="	rounded border border-cyan-950 " style="padding:5px 20px">Edit Profile Image</a>
+                <a  href="{{route( "name_edit_show")}}" class="mr-8 bg-cyan-950	rounded text-white" style="padding:5px 20px">Edit Name</a>
             </div>
-                <button class="reset_password  w-full p-5 bg-blue-200 flex justify-center text-white align-center my-12 bg-cyan-950">Reset your password</button>
+                <a href="{{route("home")}}" class="reset_password  w-full p-5 bg-blue-200 flex justify-center text-white align-center my-12 bg-cyan-950">Go Home</a>
             <div class="phone mt-7 flex justify-between align-center">
                 <div class="number">
                 @if (empty($data->phone))
@@ -43,19 +43,30 @@ $src="/uploads/{$data->image}";
                 @endif
                     Your phone number:{{$data->phone}}
                 </div>
-                <a href="{{route("phone_number_edit_show","1")}}" class=" bg-cyan-950 rounded text-white p-2">Edit</a>
+                <a href="{{route("phone_number_edit_show")}}" class=" bg-cyan-950 rounded text-white p-2">Edit</a>
             </div>
             <div class="email mt-7 flex justify-between align-center">
                 <div class="email">
                     Your email :{{$data->email}}
                 </div>
-                <a href="{{route( "email_edit_show","1")}}" class=" bg-cyan-950 rounded text-white p-2">Edit</a>
+                <a href="{{route( "email_edit_show")}}" class=" bg-cyan-950 rounded text-white p-2">Edit</a>
             </div>
-            <button class=" w-full p-5  flex justify-center align-center  my-12 border-2 border-cyan-950" >Display your quizes</button>
+            @if(Auth::user()->role=="admin")
+            <a href="{{route("admin.all_quizes")}}" class=" w-full p-5  flex justify-center align-center  my-12 border-2 border-cyan-950" >Display your quizes</a>
+            @else
+            <a href="{{route("display_all_quizzes")}}" class=" w-full p-5  flex justify-center align-center  my-12 border-2 border-cyan-950" >Display your quizes</a>
+            @endif
           
             <div class="logout_delete flex ">
-            <button class="mt-7 mr-5 p-5 bg-cyan-950 flex justify-center align-center text-white rounded" >Logout</button>
-            <button class="mt-7  p-5 bg-red-700 flex justify-center align-center text-white rounded" >Delete account</button>
+                <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="mt-7 mr-5 p-5 bg-cyan-950 flex justify-center align-center text-white rounded" >Logout</button>
+                </form>
+                <form action="{{ route('delete-account') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                @csrf
+                @method('DELETE')
+                <button class="mt-7  p-5 bg-red-700 flex justify-center align-center text-white rounded" >Delete account</button>
+                </form>
             </div>
         </div>
     </div>

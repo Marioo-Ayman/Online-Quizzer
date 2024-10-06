@@ -12,8 +12,8 @@
 
     <div class="p-32 bg-gray-200 pt-20 parent">
         
-    <h2 class="text-center	mb-4 text-4xl">{{$students->first()->title}} quiz</h2>
-    <h3 class="text-center	mb-16 text-2xl"><span style="color:#0d6efd">{{$students->first()->description}} </span></h3>
+    <h2 class="text-center	mb-4 text-4xl">{{!empty($students->first()->title) ? $students->first()->title:"show "}} quiz</h2>
+    <h3 class="text-center	mb-16 text-2xl"><span style="color:#0d6efd">{{!empty($students->first()->description) ? $students->first()->description:"in more details"}} </span></h3>
 
     <div class="overflow-x-auto">
     <table class="table-auto w-full bg-gray-200 text-center">

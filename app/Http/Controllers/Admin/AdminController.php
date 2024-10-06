@@ -278,7 +278,7 @@ class AdminController extends Controller
 
         //////////////////////////////abanoub////////////////////////////////////
         function all_quizes(){
-        $quizes=Quiz::where("user_id",1)->paginate(2);
+        $quizes=Quiz::where("user_id",1)->paginate(10);
         return view("admin.all_quizes",["quizes"=>$quizes]);
         }
 
