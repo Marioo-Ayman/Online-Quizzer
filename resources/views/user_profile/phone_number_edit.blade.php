@@ -1,7 +1,7 @@
 @php
     $title = "User profile";
     $cssLinks = [];  // Your array of CSS links
-    $body_classes = "bg-cyan-800";
+    $body_classes = "bg-gray-500";
 @endphp
 
 <x-header :cssLinks="$cssLinks" :title="$title" :body_classes="$body_classes">

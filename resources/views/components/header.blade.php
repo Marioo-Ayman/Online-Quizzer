@@ -24,13 +24,21 @@
     md:px-32 md:py-3
     lg:px-48 lg:py-3
     xl:px-72 xl:py-3">
-        <img src="/images/logo_dark.svg" alt="logo">
+            @if (Auth::user())
+                <img src="/uploads/{{Auth()->user()->image}}" alt="logo" style="width:60px;height:60px;border-radius:50%">
+                @else
+                <img src="/uploads/avatar.png" alt="logo" style="width:60px;height:60px;border-radius:50%">
+            @endif
+            <img src="/images/logo_dark.svg" alt="logo">
         <div class="min-w-20 flex justify-between md:justify-end">
             <i class="toogle fa-solid fa-bars text-2xl cursor-pointer md:hidden"></i>
-            @if (session('user'))
-                <a href="#" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Logout</a>
+            @if (Auth::user())
+                <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Logout</button>
+                </form>
             @else
-                <a href="/user/show" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
+                <a href="/login" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
             @endif
         </div>
     </div>
@@ -38,9 +46,13 @@
         <ul class="flex flex-col justify-center items-start gap-4 p-5
         md:flex-row md:justify-between md:items-center md:px-20 md:py-3
         xl:px-72">
-            <li class="hover:text-yellow-500"><a href="#">Home</a></li>
-            @if (session('user'))
-                <li class="hover:text-yellow-500"><a href="#">Profile</a></li>
+            <li class="hover:text-yellow-500"><a href="/">Home</a></li>
+            @if(Auth::user())
+                @if (Auth::user()->role == "admin")
+                    <li class="hover:text-yellow-500"><a href="/dashboard">Dashboard</a></li>
+                @else 
+                    <li class="hover:text-yellow-500"><a href="/user_profile">Profile</a></li>
+                @endif
             @endif
             <li class="hover:text-yellow-500"><a href="#">Contact</a></li>
             <li class="hover:text-yellow-500"><a href="#">About Us</a></li>
