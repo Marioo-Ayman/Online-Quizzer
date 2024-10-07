@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-$jsLinks = []; // JavaScript file names
+$jsLinks = ['create_quiz']; // JavaScript file names
 $cssLinks = []; // CSS file names
 $title = 'Create Quiz';
 @endphp
@@ -28,10 +28,10 @@ $title = 'Create Quiz';
             @enderror
 
 
-            <input type="hidden" name="time_limit" value="{{ $time_limit }}">
-            <input type="hidden" name="number_of_questions" value="{{ $number_of_questions }}">
-            <input type="hidden" name="user_id" value="{{ $user_id }}">
-            <input type="hidden" name="topic_id" value="{{ $topic_id }}">
+            <input type="hidden" name="time_limit" value="{{ old('time_limit') }}">
+            <input type="hidden" name="number_of_questions" value="{{ old('number_of_questions') }}">
+            <input type="hidden" name="user_id" value="{{ old('user_id') }}">
+            <input type="hidden" name="topic_id" value="{{ old('topic_id') }}">
 
             <h3 class="text-lg font-semibold mt-4">Questions</h3>
             @for ($i = 0; $i < $number_of_questions; $i++)
@@ -51,6 +51,7 @@ $title = 'Create Quiz';
 
                 <div class="answers-container" id="answers-container-{{ $i }}">
                     <!-- Default to multiple choice (4 options) -->
+                    <div class="multiple-choice-options">
                     <div class="flex items-center mb-1">
                         <label for="questions[{{ $i }}][options][a]" class="block text-gray-700 font-semibold">Option A:</label>
                         <input type="text" name="questions[{{ $i }}][options][a]" value="{{ old('questions.'.$i.'.options.a') }}" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
@@ -75,7 +76,7 @@ $title = 'Create Quiz';
 
 
 
-                    <div class="multiple-choice-options">
+
                         <div class="flex items-center mb-1">
                             <label for="questions[{{ $i }}][options][c]" class="block text-gray-700 font-semibold">Option C:</label>
                             <input type="text" name="questions[{{ $i }}][options][c]" value="{{ old('questions.'.$i.'.options.c') }}" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50">
@@ -99,6 +100,29 @@ $title = 'Create Quiz';
 
 
                     </div>
+
+
+                    <div class="trueAndFalse" style="display: none">
+                    <div class="flex items-center mb-1">
+                        <label for="questions[{{ $i }}][options][e]" class="block text-gray-700 font-semibold">True</label>
+                        <input type="hidden" name="questions[{{ $i }}][options][e]" value="true">
+                        <input type="radio" name="questions[{{ $i }}][correct]" value="e" {{ old('questions.'.$i.'.correct') == 'e' ? 'checked' : '' }} class="ml-2 checked:bg-green-500 focus:ring-green-700">
+                        @error('questions.'.$i.'.options.e')
+                        <div class="p-2 bg-red-300 rounded my-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+
+
+                    <div class="flex items-center mb-1">
+                        <label for="questions[{{ $i }}][options][f]" class="block text-gray-700 font-semibold">False</label>
+                        <input type="hidden" name="questions[{{ $i }}][options][f]" value="false">
+                        <input type="radio" name="questions[{{ $i }}][correct]" value="f" {{ old('questions.'.$i.'.correct') == 'f' ? 'checked' : '' }} class="ml-2 checked:bg-green-500 focus:ring-green-700">
+                        @error('questions.'.$i.'.options.f')
+                        <div class="p-2 bg-red-300 rounded my-2">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
     </div>
     @endfor
@@ -108,29 +132,5 @@ $title = 'Create Quiz';
 </div>
 </div>
 
-<script>
-    function toggleOptions(index) {
-        var typeSelect = document.getElementById('type-' + index);
-        var answersContainer = document.getElementById('answers-container-' + index);
-        var multipleChoiceOptions = answersContainer.querySelector('.multiple-choice-options');
-
-        if (typeSelect.value === 'true_false') {
-            // Hide options C and D for true/false questions
-            multipleChoiceOptions.style.display = 'none';
-
-            // Ensure only two options are required for true/false
-            answersContainer.querySelector('input[name="questions[' + index + '][options][a]"]').required = true;
-            answersContainer.querySelector('input[name="questions[' + index + '][options][b]"]').required = true;
-        } else {
-            // Show options C and D for multiple choice questions
-            multipleChoiceOptions.style.display = 'block';
-
-            // Make sure all four options are required for multiple choice
-            answersContainer.querySelector('input[name="questions[' + index + '][options][a]"]').required = true;
-            answersContainer.querySelector('input[name="questions[' + index + '][options][b]"]').required = true;
-            answersContainer.querySelector('input[name="questions[' + index + '][options][c]"]').required = true;
-            answersContainer.querySelector('input[name="questions[' + index + '][options][d]"]').required = true;
-        }
-    }
-</script>
+<script src="{{ asset('js/quiz.js') }}"></script>
 @endsection

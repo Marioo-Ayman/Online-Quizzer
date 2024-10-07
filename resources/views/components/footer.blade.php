@@ -101,10 +101,12 @@
         $filePath = public_path("JS/{$link}.js");
     @endphp
         @if (file_exists($filePath))
-        <script src="{{ asset('JS/' . $link . '.js')}}"></script>
+
+         <script src="{{ asset("JS/{$link}.js") }}"></script>
+
         @endif
 @endforeach
 @endif
-<script src="{{ asset('JS/header.js') }}"></script>
+<script src="../JS/header.js"></script>
 </body>
 </html>

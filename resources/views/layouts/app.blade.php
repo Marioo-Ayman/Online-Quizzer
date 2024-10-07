@@ -20,7 +20,7 @@
         @yield('content')
     </main>
 
-    @yield('scripts')
+
 
     <!-- Include the footer component -->
     <x-footer :jsLinks="$jsLinks" />
