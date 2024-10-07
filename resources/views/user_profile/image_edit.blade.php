@@ -1,7 +1,7 @@
 @php
     $title = "User profile";
     $cssLinks = [];  // Your array of CSS links
-    $body_classes = "bg-cyan-800";
+    $body_classes = "bg-gray-500";
 @endphp
 
 <x-header :cssLinks="$cssLinks" :title="$title" :body_classes="$body_classes">
@@ -27,7 +27,7 @@
         <div>
             <button type="submit" 
                     class="w-full bg-stone-950 text-white py-2 px-4 rounded-md hover:bg-cyan-800 focus:ring-4 focus:ring-indigo-300">
-                Upload ypur image
+                Upload your image
             </button>
         </div>
     </form>

@@ -16,6 +16,7 @@ class UserController extends Controller
     // }
 
     public function store(Request $request){
+        dd(Auth::user()->role);
 
         $request->validate([
             'email'=>'required|email',
@@ -27,7 +28,10 @@ class UserController extends Controller
             'password'=>$request->password,
         ];
         if(Auth::attempt($credentials, $request->remember_me)){
-            return view('user.userDashboard');
+            if(Auth::user()->role=="admin")
+                return view('user.userDashboard');
+            else
+                return view('user_profile.user_profile');
         };
         throw ValidationException::withMessages([
             'email'=>['credentail false']
