@@ -139,7 +139,6 @@ class QuizController extends Controller
                 }
             } elseif ($questionData['type'] === 'true_false') {
 
-
                 foreach (['e', 'f'] as $key) {
                     if (isset($questionData['options'][$key])) {
                         Answer::create([
@@ -149,24 +148,19 @@ class QuizController extends Controller
                         ]);
                     }
                 }
-=======
-                Answer::create([
-                    'question_id' => $question->id,
-                    'answer_text' => 'True',
-                    'is_correct' => ($questionData['correct'] === 'true'),
-                ]);
-                Answer::create([
-                    'question_id' => $question->id,
-                    'answer_text' => 'False',
-                    'is_correct' => ($questionData['correct'] === 'false'),
-                ]);
-
             }
         }
 
-        return redirect()->route('quiz.selectForm')->with('success', 'Quiz created successfully!');
+        return redirect()->route('admin.quiz.selectForm')->with('success', 'Quiz created successfully!');
     }
-=
+
+    public function showQuizzes()
+    {
+        // Retrieve all quizzes from the database
+        $quizzes = Quiz::with(['user', 'topic'])->get(); // Eager load users and topics for display
+
+        return view('admin.quiz.show_quizzes', compact('quizzes'));
+    }
 
     public function showQuiz($studentId, $quizId)
     {
@@ -253,6 +247,5 @@ public function retakeQuiz($studentId, $quizId)
 
     return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
 }
-
 
 }
