@@ -12,12 +12,7 @@ $title = 'Quiz';
         <h2 class="text-xl font-bold mb-4">{{ $quiz->title }}</h2>
         <p class="mb-4">{{ $quiz->description }}</p>
 
-        <!-- Display Timer Only When Quiz Starts -->
 
-
-
-
-        <!-- Score Section -->
         @if(session()->has('score'))
         <div class="bg-green-300 p-2 rounded mb-4">
             Your score: {{ session('score') }} out of {{ count($quiz->questions) }}
@@ -54,10 +49,7 @@ $title = 'Quiz';
             </div>
             @endforeach
 
-            <!-- Submit button hidden if score is shown -->
-            <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">
-                Submit Answers
-            </button>
+            <button type="submit" class="w-full bg-green-700 text-white font-semibold py-2 rounded-lg shadow-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500">Submit Answers</button>
         </form>
 
         @endif
