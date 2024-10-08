@@ -24,12 +24,10 @@
     md:px-32 md:py-3
     lg:px-48 lg:py-3
     xl:px-72 xl:py-3">
-
-            @if (Auth::user())
-                <img src="{{Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
-                {{-- @else
-                <img src="{{ Auth::user()->image }}" alt="person image" style="width:60px;height:60px;border-radius:50%"> --}}
-             @endif
+            
+              @auth
+            <img src="{{ Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
+            @endauth
 
             <img src="/images/logo_dark.svg" alt="logo">
         <div class="min-w-20 flex justify-between md:justify-end">
