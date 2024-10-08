@@ -42,8 +42,10 @@
                                     <p class="leading-6 p-3">{{$quiz['description']}}</p>
                                     <div class="p-2 rounded-md flex justify-between">
                                         <span class="text-gray-400">{{$quiz['author']}}</span>
-                                        <a href="#{{$quiz['id']}}" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                            <i class="fa-solid fa-arrow-right-long "></i>
+                                        @if(Auth::user())
+                                        <a href="/user/quiz/{{Auth::user()->id}}/{{$quiz['id']}}" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
+                                         @endif  
+                                        <i class="fa-solid fa-arrow-right-long "></i>
                                         </a>
                                     </div>
                                 </li>

@@ -12,8 +12,11 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
+   
     public function index()
     {
+           
+           
         $topics = Topic::get(['id', 'name']);
         $quizzes = Quiz::select('quizzes.id', 'quizzes.title', 'quizzes.description', 'users.name as author', 'topic_id')
             ->join('users', 'quizzes.user_id', '=', 'users.id')
@@ -31,9 +34,8 @@ class HomeController extends Controller
                 }
             }
         }
-
         return view('home', [
-            'topics' => $topics
+            'topics' => $topics,
         ]);
     }
 
