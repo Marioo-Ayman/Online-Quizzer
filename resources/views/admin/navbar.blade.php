@@ -124,54 +124,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                <img src="uploads/{{ Auth::user()->image }}" alt=""
-                                    class="w-8 h-8 rounded block object-cover align-middle">
-                                <div class="ml-2">
-                                    <div
-                                        class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
-                                        {{ Auth::user()->name }}</div>
-                                    <div class="text-[11px] text-gray-400">Hello there!</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                <img src="uploads/{{ Auth::user()->image }}" alt=""
-                                    class="w-8 h-8 rounded block object-cover align-middle">
-                                <div class="ml-2">
-                                    <div
-                                        class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
-                                        {{ Auth::user()->name }}</div>
-                                    <div class="text-[11px] text-gray-400">Hello there!</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                <img src="uploads/{{ Auth::user()->image }}" alt=""
-                                    class="w-8 h-8 rounded block object-cover align-middle">
-                                <div class="ml-2">
-                                    <div
-                                        class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
-                                        John Doe</div>
-                                    <div class="text-[11px] text-gray-400">Hello there!</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                <img src="uploads/{{ Auth::user()->image }}" alt=""
-                                    class="w-8 h-8 rounded block object-cover align-middle">
-                                <div class="ml-2">
-                                    <div
-                                        class="text-[13px] text-gray-600 font-medium truncate group-hover:text-blue-500">
-                                        {{ Auth::user()->name }}</div>
-                                    <div class="text-[11px] text-gray-400">Hello there!</div>
-                                </div>
-                            </a>
-                        </li>
+                    
                     </ul>
                 </div>
             </div>

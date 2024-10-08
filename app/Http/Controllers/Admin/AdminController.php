@@ -50,7 +50,12 @@ class AdminController extends Controller
 
             $id = Auth::user()->id;
             $userData =User::findOrFail($id);
-            return view('admin.adminProfileView', compact('userData'));
+            if (Auth::user()->role ==="admin") {
+                # code...
+                return view('admin.adminProfileView', compact('userData'));
+            }
+
+            return redirect('/');
         }
 
 
@@ -68,47 +73,7 @@ class AdminController extends Controller
     public function contact_to_admin(){
         return view('auth.contactWithAdmin');
     }
-    // function sendEmail(Request $request){
-    //     $request->validate([
-    //         'email'=>'required'
-    //     ]);
-
-    //     if(Auth::attempt($request->email)){
-    //         return redirect('dashboard');
-    //     }
-    //     throw ValidationException::withMessages([
-    //         'email'=>['credentials false']
-    //     ]);
-    // }
-    // public function send_reset(Request $request)
-    // {
-    //     $request->validate(['email' => "required|email"]);
-    //     $res = Password::sendResetLink($request->only('email'));
-    //     return $res === Password::RESET_LINK_SENT ? back()->with('status' , "Password link sent") : back()->withErrors(['email' => 'not valid']);
-    // }
-
-
-
-        // function sendEmail(Request $request){
-
-        //     Mail::to($request->email)->send(new SendEmail($request->email));
-        //     return redirect(route('admin.dashboard'));
-        // }
-        // public function sendEmail(Request $request)
-        // {
-        //     // Mail::to($request->email)->queue(new SendEmail($request->email));
-        //     // // return redirect(route('admin.dashboard'));
-        //     // return view('auth.email_message');
-
-        //     // Log::info("Attempting to send email to: " . $request->email);
-
-        //     Mail::to($request->email)->queue(new SendEmail($request->email));
-
-        //     // Log::info("Email dispatched to queue.");
-        //     return view('auth.email_message');
-
-        // }
-        public function sendEmail(Request $request)
+         public function sendEmail(Request $request)
         {
             // ini_set('max_execution_time', 120);
 
@@ -265,8 +230,6 @@ class AdminController extends Controller
 
 
         public function countOfUsers(){
-            //  $userCount = User::where('role', "user")->count(); // Count users
-            //   return view('admin.content', compact($userCount));
             $userCount = User::where('role', 'user')->count(); // Count users
             dd($userCount);
             return view('admin.content', ['userCount' => $userCount]); // Pass to view

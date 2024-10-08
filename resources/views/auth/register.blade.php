@@ -14,19 +14,19 @@
             left: 0;
             bottom: 0;
             right: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
 
-          }
+            background-color: rgba(0, 0, 0, 0.6);
+           }
     </style>
 </head>
 
-<body class=" bg-no-repeat" style="background-image: url('{{ asset('images/auth-bg.jpg') }}');">
-    <div class="bg-overlay  h-full "></div>
+<body class="image-background bg-no-repeat"  style="background-image: url('{{ asset('images/auth-bg.jpg') }}');">
+    <div class="bg-overlay absolute  h-full "></div>
     <div
         {{-- class="wrapper-page  absolute top-0 bottom-0  w-full h-full flex justify-center items-center bg-cover bg-center " style="background-image: url('{{ asset('images/auth-bg.jpg') }}');"> --}}
-        class="wrapper-page  absolute top-0 bottom-0  w-full h-full flex justify-center items-center bg-cover bg-center "  >
+        {{-- class="wrapper-page  absolute w-full h-full flex justify-center items-center bg-cover bg-center "  > --}}
+        class="wrapper-page  absolute left-0 right-0 top-0 bottom-0 w-full h-full flex justify-center      "  >
+
         <div class="container  mx-auto">
             <div class="max-w-md mx-auto mt-8 bg-white rounded p-8 ">
                 <div class="text-center mb-4">

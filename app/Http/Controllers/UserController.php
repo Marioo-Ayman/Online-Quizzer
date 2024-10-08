@@ -16,8 +16,7 @@ class UserController extends Controller
     // }
 
     public function store(Request $request){
-        dd(Auth::user()->role);
-
+ 
         $request->validate([
             'email'=>'required|email',
             'password'=>'required',

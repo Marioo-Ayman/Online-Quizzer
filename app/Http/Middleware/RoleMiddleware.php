@@ -17,10 +17,10 @@ class RoleMiddleware
     // public function handle(Request $request, Closure $next, $role): Response
     public function handle(Request $request, Closure $next): Response
     {// column table name
-        if (Auth::user()->role === 'user') {
-            // return to_route('admin.dashboard');
+        // if (Auth::user()->role === 'user') {
+        //     // return to_route('admin.dashboard');
             return $next($request);
-        }
-        return redirect()->back();
+        // }
+        // return redirect()->back();
      }
 }

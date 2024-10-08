@@ -24,20 +24,30 @@
     md:px-32 md:py-3
     lg:px-48 lg:py-3
     xl:px-72 xl:py-3">
+
             @if (Auth::user())
-                <img src="/uploads/{{Auth()->user()->image}}" alt="logo" style="width:60px;height:60px;border-radius:50%">
-                @else
-                <img src="/uploads/avatar.png" alt="logo" style="width:60px;height:60px;border-radius:50%">
-            @endif
+                <img src="{{Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
+                {{-- @else
+                <img src="{{ Auth::user()->image }}" alt="person image" style="width:60px;height:60px;border-radius:50%"> --}}
+             @endif
+
             <img src="/images/logo_dark.svg" alt="logo">
         <div class="min-w-20 flex justify-between md:justify-end">
             <i class="toogle fa-solid fa-bars text-2xl cursor-pointer md:hidden"></i>
+
+            @auth
+            <a href="/user_profile" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Welcome: {{Auth::user()->name }}</a>
+            @endauth
+
             @if (Auth::user())
+
                 <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Logout</button>
                 </form>
             @else
+
+                <a href="/register" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Register</a>
                 <a href="/login" class="ml-2 bg-gray-800 text-white py-1 px-3 rounded-xl hover:text-yellow-500">Login</a>
             @endif
         </div>
@@ -47,10 +57,10 @@
         md:flex-row md:justify-between md:items-center md:px-20 md:py-3
         xl:px-72">
             <li class="hover:text-yellow-500"><a href="/">Home</a></li>
-            @if(Auth::user())
-                @if (Auth::user()->role == "admin")
+             @if(Auth::user())
+                @if (Auth::check() && Auth::user()->role == "admin")
                     <li class="hover:text-yellow-500"><a href="/dashboard">Dashboard</a></li>
-                @else 
+                @else
                     <li class="hover:text-yellow-500"><a href="/user_profile">Profile</a></li>
                 @endif
             @endif
@@ -62,11 +72,10 @@
                 <i class="fa-solid fa-chevron-up text-xs ml-2 hidden group-hover:inline-block"></i>
                 </span>
 
-                <ul class="bg-gray-800 absolute top-6 left-0 min-w-32 p-5 flex-col gap-4 hidden group-hover:flex hover:flex">
-                    <li class="hover:text-yellow-500"><a href="#">Math</a></li>
-                    <li class="hover:text-yellow-500"><a href="#">English</a></li>
-                    <li class="hover:text-yellow-500"><a href="#">Computer</a></li>
-                    <li class="hover:text-yellow-500"><a href="#">Science</a></li>
+                 <ul class="bg-gray-800 absolute top-6 left-0 min-w-32 p-5 flex-col gap-4 hidden group-hover:flex hover:flex">
+                     @foreach ($topics as $topic)
+                    <li class="hover:text-yellow-500"><a href="#">{{ $topic->name }}</a></li>
+                    @endforeach
                 </ul>
             </li>
 
