@@ -82,14 +82,7 @@ class HomeController extends Controller
         ]);
     }
 
-
-    public function showAllTopics()
-    {
-        $topics = Topic::all();
-         return $topics; // Return the topics, or you can keep it as is if you need to display them in a specific view.
-    }
-
-
+ 
 
     /**
      * Show the form for creating a new resource.

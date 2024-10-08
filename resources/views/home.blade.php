@@ -22,8 +22,7 @@
     <div class="text-center">
         <input id="search-box" type="text" placeholder="Search . . ." class="w-[60%] rounded-2xl bg-gray-800">
     </div>
-
-    @foreach ($topics as $topic)
+     @foreach ($topics as $topic)
         <div class="topic-items select-none py-6
                 md:p-6">
             <ul class="flex flex-col gap-3 bg-gray-800 rounded-2xl py-5
@@ -44,9 +43,9 @@
                                         <span class="text-gray-400">{{$quiz['author']}}</span>
                                         @if(Auth::user())
                                         <a href="/user/quiz/{{Auth::user()->id}}/{{$quiz['id']}}" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                         @endif  
-                                        <i class="fa-solid fa-arrow-right-long "></i>
+                                            <i class="fa-solid fa-arrow-right-long "></i>
                                         </a>
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach
