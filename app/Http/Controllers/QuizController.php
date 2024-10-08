@@ -254,24 +254,6 @@ class QuizController extends Controller
             }
         }
 
-        User_Score::create([
-            'user_id' => $studentId,
-            'quiz_id' => $quizId,
-            'user_score' => $score,
-        ]);
-
-        return redirect()->route('user.quiz.show', [$studentId, $quizId])->with('score', $score);
-    }
-
-    public function retakeQuiz($studentId, $quizId)
-    {
-
-        session()->forget('score');
-        $quiz = Quiz::findOrFail($quizId);
-        $adminId = $quiz->user_id;
-        $timeLimit = $quiz->time_limit;
-
-
-        return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
+        return redirect()->route('quiz.selectForm')->with('success', 'Quiz created successfully!');
     }
 }
