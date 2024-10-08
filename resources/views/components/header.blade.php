@@ -63,10 +63,9 @@
                 </span>
 
                 <ul class="bg-gray-800 absolute top-6 left-0 min-w-32 p-5 flex-col gap-4 hidden group-hover:flex hover:flex">
-                    <li class="hover:text-yellow-500"><a href="#">Math</a></li>
-                    <li class="hover:text-yellow-500"><a href="#">English</a></li>
-                    <li class="hover:text-yellow-500"><a href="#">Computer</a></li>
-                    <li class="hover:text-yellow-500"><a href="#">Science</a></li>
+
+                        <li class="hover:text-yellow-500"><a href="#">sdsdsd</a></li>
+                    
                 </ul>
             </li>
 
