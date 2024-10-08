@@ -89,7 +89,10 @@
                     </ul>
                 </div>
             </div>
-            <a href="{{route("admin.quiz.selectForm")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
+            <div class="flex justify-between">
+                <a href="{{route("admin.quiz.selectForm")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">Create</a>
+                <a href="{{route("admin.quizzes.show")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">Show Quizzes</a>
+            </div>
         </div>
     </div>
 

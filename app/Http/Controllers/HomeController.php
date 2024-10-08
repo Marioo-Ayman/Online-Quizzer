@@ -40,6 +40,8 @@ class HomeController extends Controller
     // }
     public function index()
     {
+
+
         $topics = Topic::get(['id', 'name']);
 
         // Get current user
@@ -74,7 +76,6 @@ class HomeController extends Controller
                 }
             }
         }
-
         return view('home', [
             'topics' => $topics,
             'quizzes' => $quizzes

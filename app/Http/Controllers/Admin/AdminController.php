@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
-
+use App\Models\Topic;
 use function PHPUnit\Framework\returnValue;
 
 class AdminController extends Controller
@@ -169,7 +169,7 @@ class AdminController extends Controller
 
         //////////////////////////////abanoub////////////////////////////////////
         function all_quizes(){
-        $quizes=Quiz::where("user_id",1)->paginate(10);
+        $quizes=Quiz::where("user_id",Auth::user()->id)->paginate(10);
         return view("admin.all_quizes",["quizes"=>$quizes]);
         }
 
@@ -204,7 +204,10 @@ class AdminController extends Controller
             return view('admin.all_quizes', ['quizes' => $result]);
          }
 
-
+    //    function show_all_topics(){
+    //     $topics=Topic::all();
+    //     return view("components.header",["allTopics"=>$topics]);
+    //    }
 
 }
 

@@ -113,7 +113,3 @@ Route::post('/quiz/store', [QuizController::class, 'store'])->name('quiz.store')
 Route::get('admin/dashboard/all_quizes',[AdminController::class,"all_quizes"])->name("admin.all_quizes");
 Route::post('admin/dashboard/all_quizes',[AdminController::class,"search_quiz"])->name("search_quiz");
 Route::get('admin/dashboard/all_quizes/show_quiz/{quiz_id}',[AdminController::class,"show_quiz"])->name("admin.show_quiz");
-
-
-
-Route::get("showAllTopics", [HomeController::class, "showAllTopics"])->name('showAllTopics');
