@@ -42,9 +42,16 @@
                                     <div class="p-2 rounded-md flex justify-between">
                                         <span class="text-gray-400">{{$quiz['author']}}</span>
                                         @if(Auth::user())
+                                            @if(Auth::user()->role=="user")
                                         <a href="/user/quiz/{{Auth::user()->id}}/{{$quiz['id']}}" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
                                             <i class="fa-solid fa-arrow-right-long "></i>
                                         </a>
+                                            @endif
+                                            @if(Auth::user()->role=="admin")
+                                        <a style="display:none" href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
+                                            <i class="fa-solid fa-arrow-right-long "></i>
+                                        </a >
+                                            @endif
                                         @endif
                                     </div>
                                 </li>
