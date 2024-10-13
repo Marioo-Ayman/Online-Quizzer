@@ -29,7 +29,7 @@
     xl:px-72 xl:py-3">
 
             @auth
-                <img src="{{ Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
+                <img src="uploads/{{ Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
             @endauth
 
             <a href="{{ url('/') }}"><img src="/images/logo_dark.svg" alt="logo"></a>
