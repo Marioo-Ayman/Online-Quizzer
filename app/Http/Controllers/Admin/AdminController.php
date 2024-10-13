@@ -19,30 +19,16 @@ use function PHPUnit\Framework\returnValue;
 class AdminController extends Controller
 {
     function index(){
-        // $role = User::select('role')->get();
-        $user = User::all();
 
-        //   if($role=== 'admin'){
-            // return view('admin.dashboard.index');   // that is working
-
-            //  $user = User::get();
 
             if(Auth::user()->role == "admin"){
+                $user = User::all();
 
                 return view('admin.index', ['user'=>$user]);
             }
-            // if(Auth::user()->role === 'user'){
-            //     return view('user.userDashboard');
-            // }
 
             return redirect()->back();
-            // }else{
-            //     $role = User::select('role')->get();
-            //     if($role ==='user'){
-
-            //         return view('view.dashboard');
-            //     }
-            // }
+        
         }
 
 
@@ -126,7 +112,7 @@ class AdminController extends Controller
             dd($users);
             return response()->json($users);
         }
- 
+
 
         public function getUser($id) {
             $user = DB::select("

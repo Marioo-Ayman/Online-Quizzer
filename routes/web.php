@@ -43,44 +43,24 @@ Route::view('test', 'test');
 
 Route::get('/dashboard', function () {
     return view('admin.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
 Route::get('admin/profile', [UserProfileController::class,'user_profile_show'])->middleware('auth')->name('admin.profile');
-// Route::controller(AdminController::class)->prefix('admin')->group(['middleware'=>['adminMiddleware']],function () {
 
-//     Route::get('dashboard', 'index')->middleware('auth')->name('admin.dashboard');
-//     Route::get('logout', 'AdminLogout')->middleware('auth')->name('admin.logout');
-//     Route::get('contact', 'contact_to_admin')->middleware('auth')->name('admin.contact');
-
-//     Route::get( 'all_users', 'getAllUsers')->middleware('auth')->name('admin.getAllUsers');
-
-//     Route::get('all_users/search', 'search')->middleware('auth')->name('admin.getAllUsers.search');
-//     // Route::get('all_users/search/{keyword}','search')->middleware('auth')->name('admin.getAllUsers');
-//     Route::get('getUser/{id}', 'getUser')->middleware('auth')->name('admin.getUser');
-//     Route::get('countOfUsers', 'countOfUsers')->middleware('auth')->name('admin.countOfUsers'); //count of users
-
-//     Route::get('/quiz/select', [QuizController::class, 'selectForm'])->middleware('auth')->name('admin.quiz.selectForm');
-//     Route::post('/quiz/setup', [QuizController::class, 'setupQuiz'])->middleware('auth')->name('admin.quiz.setup');
-
-//     Route::get('/quiz/create', [QuizController::class, 'createQuizForm'])->middleware('auth')->name('admin.quiz.createForm');
-//     Route::post('/quiz/store', [QuizController::class, 'store'])->middleware('auth')->name('admin.quiz.store');
-
-//     Route::get('/quiz/quizzes', [QuizController::class, 'showQuizzes'])->middleware('auth')->name('admin.quizzes.show');
-// });
-
-
-
-
-
-Route::group(['prefix' => 'admin', 'middleware' => ['adminMiddleware', 'auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']], function () {
     Route::controller(AdminController::class)->group(function () {
-        Route::get('dashboard', 'index')->name('admin.dashboard');
+        // Route::get('dashboard', 'index')->name('admin.dashboard');
         Route::get('logout', 'AdminLogout')->name('admin.logout');
         Route::get('contact', 'contact_to_admin')->name('admin.contact');
         Route::get('all_users', 'getAllUsers')->name('admin.getAllUsers');
         Route::get('all_users/search', 'search')->name('admin.getAllUsers.search');
         Route::get('getUser/{id}', 'getUser')->name('admin.getUser');
         Route::get('countOfUsers', 'countOfUsers')->name('admin.countOfUsers'); // count of users
+
+        Route::get('admin/dashboard/all_quizes',"all_quizes")->name("admin.all_quizes");
+        Route::post('admin/dashboard/all_quizes',"search_quiz")->name("search_quiz");
+        Route::get('admin/dashboard/all_quizes/show_quiz/{quiz_id}',"show_quiz")->name("admin.show_quiz");
+
     });
 
     Route::controller(QuizController::class)->group(function () {
@@ -95,7 +75,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['adminMiddleware', 'auth']],
 
 
 
-Route::get('/user/show', [UserController::class, 'login'])->middleware('auth')->name('user.show');
+// Route::get('/user/show', [UserController::class, 'login'])->middleware('auth')->name('user.show');
 Route::post('/user/login', [UserController::class, 'store'])->middleware('auth')->name('user.login');
 Route::get('/user/logout', [UserController::class, 'logout'])->middleware('auth')->name('user.logout');
 

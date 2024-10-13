@@ -29,10 +29,10 @@
     xl:px-72 xl:py-3">
 
             @auth
-                <img src="/uploads/{{ Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
+                <img src="{{ Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
             @endauth
 
-            <img src="/images/logo_dark.svg" alt="logo">
+            <a href="{{ url('/') }}"><img src="/images/logo_dark.svg" alt="logo"></a>
             <div class="min-w-20 flex justify-between md:justify-end">
                 <i class="toogle fa-solid fa-bars text-2xl cursor-pointer md:hidden"></i>
 
