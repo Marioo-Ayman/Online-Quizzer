@@ -86,7 +86,7 @@
                         class="bg-gray-800 absolute top-6 left-0 min-w-32 p-5 flex-col gap-4 hidden group-hover:flex hover:flex">
                         @foreach ($topics as $topic)
                             <li class="hover:text-yellow-500">
-                                <a href="#">{{ $topic->name }}</a>
+                                <a href="{{route("quizzees_with_topic",$topic->id)}}">{{ $topic->name }}</a>
                             </li>
                         @endforeach
                     </ul>

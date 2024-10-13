@@ -190,11 +190,22 @@ class AdminController extends Controller
             return view('admin.all_quizes', ['quizes' => $result]);
          }
 
-    //    function show_all_topics(){
-    //     $topics=Topic::all();
-    //     return view("components.header",["allTopics"=>$topics]);
-    //    }
+    
 
+         function quizzees_with_topic($topic_id){
+            $quizes=Quiz::where("topic_id",$topic_id)->paginate(10);
+            $topic_name=Topic::find($topic_id);
+            return view("admin.quizzees_with_topic",["quizes"=>$quizes,"topic_name"=>$topic_name]);
+            }
+            public function search_specific_topic_quiz(Request $request,$topic_id)
+         {
+            $result = Quiz::where('title', 'like', '%' . $request->input('search_quiz') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('search_quiz') . '%')
+            ->where("topic_id",$topic_id)
+            ->paginate(10);
+            $topic_name=Topic::find($topic_id);
+            return view('admin.quizzees_with_topic', ['quizes' => $result,"topic_name"=>$topic_name]);
+         }
 }
 
 
