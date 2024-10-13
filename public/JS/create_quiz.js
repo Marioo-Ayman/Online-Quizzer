@@ -1,9 +1,15 @@
+window.onload = function () {
 
-    window.onload = function () {
-    // Hide the true/false options initially
-    var trueAndFalse = document.querySelectorAll('.trueAndFalse');
-    trueAndFalse.forEach(function (element) {
-        element.style.display = 'none';
+    var questionTypes = document.querySelectorAll('select[name^="questions"][name$="[type]"]');
+
+    questionTypes.forEach(function (typeSelect, index) {
+
+        toggleOptions(index);
+
+
+        typeSelect.addEventListener('change', function () {
+            toggleOptions(index);
+        });
     });
 };
 
@@ -22,6 +28,13 @@ function toggleOptions(index) {
         // Set required fields for true/false questions
         answersContainer.querySelector('input[name="questions[' + index + '][options][e]"]').required = true;
         answersContainer.querySelector('input[name="questions[' + index + '][options][f]"]').required = true;
+
+        // Clear required fields for multiple choice options
+        answersContainer.querySelector('input[name="questions[' + index + '][options][a]"]').required = false;
+        answersContainer.querySelector('input[name="questions[' + index + '][options][b]"]').required = false;
+        answersContainer.querySelector('input[name="questions[' + index + '][options][c]"]').required = false;
+        answersContainer.querySelector('input[name="questions[' + index + '][options][d]"]').required = false;
+
     } else {
         // Show multiple choice options and hide true/false options
         trueAndFalse.style.display = 'none';
@@ -32,6 +45,9 @@ function toggleOptions(index) {
         answersContainer.querySelector('input[name="questions[' + index + '][options][b]"]').required = true;
         answersContainer.querySelector('input[name="questions[' + index + '][options][c]"]').required = true;
         answersContainer.querySelector('input[name="questions[' + index + '][options][d]"]').required = true;
+
+        // Clear required fields for true/false options
+        answersContainer.querySelector('input[name="questions[' + index + '][options][e]"]').required = false;
+        answersContainer.querySelector('input[name="questions[' + index + '][options][f]"]').required = false;
     }
 }
-
