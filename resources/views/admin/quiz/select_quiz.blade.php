@@ -32,20 +32,22 @@ $title = 'Select Quiz Settings';
 
             </div>
 
-            <div class="mb-4">
-    <label for="user_id" class="block text-gray-700 font-semibold mb-2">Admin:</label>
-    <select name="user_id" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-        <option class="custom-option" value="">Choose admin!</option>
-        @foreach ($users as $user)
-            <option class="custom-option" value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
-                {{ $user->name }}
-            </option>
-        @endforeach
-    </select>
-    @error('user_id')
-        <div class="p-2 bg-red-300 rounded my-2">{{ $message }}</div>
-    @enderror
-</div>
+            <input type="number" value="{{Auth::id()}}" hidden name="user_id">
+
+            {{-- <div class="mb-4">
+                <label for="user_id" class="block text-gray-700 font-semibold mb-2">Admin:</label>
+                <select name="user_id" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option class="custom-option" value="">Choose admin!</option>
+                    @foreach ($users as $user)
+                        <option class="custom-option" value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('user_id')
+                    <div class="p-2 bg-red-300 rounded my-2">{{ $message }}</div>
+                @enderror
+            </div> --}}
 
 
 <div class="mb-4">
