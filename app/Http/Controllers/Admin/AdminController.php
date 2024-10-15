@@ -13,36 +13,22 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
-
+use App\Models\Topic;
 use function PHPUnit\Framework\returnValue;
 
 class AdminController extends Controller
 {
     function index(){
-        // $role = User::select('role')->get();
-        $user = User::all();
 
-        //   if($role=== 'admin'){
-            // return view('admin.dashboard.index');   // that is working
-
-            //  $user = User::get();
 
             if(Auth::user()->role == "admin"){
+                $user = User::all();
 
                 return view('admin.index', ['user'=>$user]);
             }
-            // if(Auth::user()->role === 'user'){
-            //     return view('user.userDashboard');
-            // }
 
             return redirect()->back();
-            // }else{
-            //     $role = User::select('role')->get();
-            //     if($role ==='user'){
-
-            //         return view('view.dashboard');
-            //     }
-            // }
+        
         }
 
 
@@ -50,7 +36,12 @@ class AdminController extends Controller
 
             $id = Auth::user()->id;
             $userData =User::findOrFail($id);
-            return view('admin.adminProfileView', compact('userData'));
+            if (Auth::user()->role ==="admin") {
+                # code...
+                return view('admin.adminProfileView', compact('userData'));
+            }
+
+            return redirect('/');
         }
 
 
@@ -68,47 +59,7 @@ class AdminController extends Controller
     public function contact_to_admin(){
         return view('auth.contactWithAdmin');
     }
-    // function sendEmail(Request $request){
-    //     $request->validate([
-    //         'email'=>'required'
-    //     ]);
-
-    //     if(Auth::attempt($request->email)){
-    //         return redirect('dashboard');
-    //     }
-    //     throw ValidationException::withMessages([
-    //         'email'=>['credentials false']
-    //     ]);
-    // }
-    // public function send_reset(Request $request)
-    // {
-    //     $request->validate(['email' => "required|email"]);
-    //     $res = Password::sendResetLink($request->only('email'));
-    //     return $res === Password::RESET_LINK_SENT ? back()->with('status' , "Password link sent") : back()->withErrors(['email' => 'not valid']);
-    // }
-
-
-
-        // function sendEmail(Request $request){
-
-        //     Mail::to($request->email)->send(new SendEmail($request->email));
-        //     return redirect(route('admin.dashboard'));
-        // }
-        // public function sendEmail(Request $request)
-        // {
-        //     // Mail::to($request->email)->queue(new SendEmail($request->email));
-        //     // // return redirect(route('admin.dashboard'));
-        //     // return view('auth.email_message');
-
-        //     // Log::info("Attempting to send email to: " . $request->email);
-
-        //     Mail::to($request->email)->queue(new SendEmail($request->email));
-
-        //     // Log::info("Email dispatched to queue.");
-        //     return view('auth.email_message');
-
-        // }
-        public function sendEmail(Request $request)
+         public function sendEmail(Request $request)
         {
             // ini_set('max_execution_time', 120);
 
@@ -128,56 +79,7 @@ class AdminController extends Controller
         }
 
         public function getAllUsers(){
-            // $users = User::all();
-            // $users = User::where('role', '=', 'user')->get();
-
-
-
-            // $users = User::where('role', '=', 'user')->with('userScore')->get();
-            // $users = User::where('role', '=', 'user')->with('userScore.quiz')->get();
-
-            // $users = User::where('role', 'user')->with('userScore');
-            // $users  = DB::table('users')
-            // ->join('users_score','user_id', '=','users_score.user_id')
-            // ->join('quizzes','user_id', '=' ,'quizzes.user_id')
-            // ->get();
-            // $users  = DB::table('users')->where('role', 'user')
-            // ->join('quizzes_users', 'users.user_id', '=', 'quizzes_users.user_id')->get();
-            // dd($users);
-            // $users = User::where('role', 'user')->with(['userScore.quiz', 'userQuizzes'])->get();
-            // $users = DB::table('users_score')
-            //     ->join('users', 'users_score.user_id', '=', 'users.id')
-            //     ->join('quizzes', 'users_score.quiz_id', '=', 'quizzes.id')
-            //     ->where('role', 'user')
-            //     ->select(
-            //         'users_score.*',
-            //         'users.name',
-            //         'users.email',
-            //         'users.phone',
-            //         'users.image',
-            //         'quizzes.title',
-            //         'quizzes.description'
-            //     )->get();
-            // $users = User::with(['userScore.quiz'])
-            // ->where('role', 'user')
-            // ->get()
-            // ->map(function ($user) {
-            //     return (object) [
-            //         'id' => $user->id,
-            //         'name' => $user->name,
-            //         'email' => $user->email,
-            //         'phone' => $user->phone,
-            //         'image' => $user->image,
-            //         'quizzes' => $user->userScore->map(function ($score) {
-            //             return (object) [
-            //                 'title' => $score->quiz->title,
-            //                 'user_score' => $score->user_score,
-            //             ];
-            //         }),
-            //     ];
-            // });
-            // $users = User::with(['userScore', 'userQuizzes'])->get();
-            $users = DB::select("
+             $users = DB::select("
             SELECT
                 users.id as user_id,
                 users.name,
@@ -212,29 +114,6 @@ class AdminController extends Controller
         }
 
 
-        // public function getUser($id){
-        //     // $user = User::find($id);
-        //     $user = DB::select("
-        //     SELECT
-        //         users.id as user_id,
-        //         users.name,
-        //         users.email,
-        //         users.phone,
-        //         users.image,
-        //         GROUP_CONCAT(quizzes.title SEPARATOR ', ') as quiz_titles,
-        //         GROUP_CONCAT(users_score.user_score SEPARATOR ', ') as scores
-        //     FROM
-        //         users
-        //     JOIN
-        //         users_score ON users.id = users_score.user_id
-        //     JOIN
-        //         quizzes ON users_score.quiz_id = quizzes.id
-        //     GROUP BY
-        //         users.id, users.name, users.email, users.phone, users.image
-        // ");
-        //     return view('admin.showSpecificUser', compact('user', 'id'));
-        // }
-
         public function getUser($id) {
             $user = DB::select("
                 SELECT
@@ -265,8 +144,6 @@ class AdminController extends Controller
 
 
         public function countOfUsers(){
-            //  $userCount = User::where('role', "user")->count(); // Count users
-            //   return view('admin.content', compact($userCount));
             $userCount = User::where('role', 'user')->count(); // Count users
             dd($userCount);
             return view('admin.content', ['userCount' => $userCount]); // Pass to view
@@ -278,7 +155,7 @@ class AdminController extends Controller
 
         //////////////////////////////abanoub////////////////////////////////////
         function all_quizes(){
-        $quizes=Quiz::where("user_id",1)->paginate(10);
+        $quizes=Quiz::where("user_id",Auth::user()->id)->paginate(10);
         return view("admin.all_quizes",["quizes"=>$quizes]);
         }
 
@@ -313,8 +190,22 @@ class AdminController extends Controller
             return view('admin.all_quizes', ['quizes' => $result]);
          }
 
+    
 
-
+         function quizzees_with_topic($topic_id){
+            $quizes=Quiz::where("topic_id",$topic_id)->paginate(10);
+            $topic_name=Topic::find($topic_id);
+            return view("admin.quizzees_with_topic",["quizes"=>$quizes,"topic_name"=>$topic_name]);
+            }
+            public function search_specific_topic_quiz(Request $request,$topic_id)
+         {
+            $result = Quiz::where('title', 'like', '%' . $request->input('search_quiz') . '%')
+            ->orWhere('description', 'like', '%' . $request->input('search_quiz') . '%')
+            ->where("topic_id",$topic_id)
+            ->paginate(10);
+            $topic_name=Topic::find($topic_id);
+            return view('admin.quizzees_with_topic', ['quizes' => $result,"topic_name"=>$topic_name]);
+         }
 }
 
 

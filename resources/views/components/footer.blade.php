@@ -38,31 +38,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="mb-5">
-                    <h4 class="pb-4">Our Services</h4>
-                    <ul class="text-gray-500">
-                        <li class="pb-4">
-                            <i class="fa fa-chevron-right text-yellow-500 "></i>
-                            <a href="#" class="hover:text-yellow-500">Lorem, ipsum.</a>
-                        </li>
-                        <li class="pb-4">
-                            <i class="fa fa-chevron-right text-yellow-500 "></i>
-                            <a href="#" class="hover:text-yellow-500">Lorem, ipsum.</a>
-                        </li>
-                        <li class="pb-4">
-                            <i class="fa fa-chevron-right text-yellow-500 "></i>
-                            <a href="#" class="hover:text-yellow-500">Lorem, ipsum.</a>
-                        </li>
-                        <li class="pb-4">
-                            <i class="fa fa-chevron-right text-yellow-500 "></i>
-                            <a href="#" class="hover:text-yellow-500">Lorem, ipsum.</a>
-                        </li>
-                        <li class="pb-4">
-                            <i class="fa fa-chevron-right text-yellow-500 "></i>
-                            <a href="#" class="hover:text-yellow-500">Lorem, ipsum.</a>
-                        </li>
-                    </ul>
-                </div>
+
                 <div class="mb-5">
                     <h4 class="pb-4">Join Us</h4>
                     <p class="text-gray-500 pb-2">join 10000+ others</p>

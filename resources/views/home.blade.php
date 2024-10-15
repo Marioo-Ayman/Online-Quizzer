@@ -22,8 +22,7 @@
     <div class="text-center">
         <input id="search-box" type="text" placeholder="Search . . ." class="w-[60%] rounded-2xl bg-gray-800">
     </div>
-
-    @foreach ($topics as $topic)
+     @foreach ($topics as $topic)
         <div class="topic-items select-none py-6
                 md:p-6">
             <ul class="flex flex-col gap-3 bg-gray-800 rounded-2xl py-5
@@ -42,9 +41,18 @@
                                     <p class="leading-6 p-3">{{$quiz['description']}}</p>
                                     <div class="p-2 rounded-md flex justify-between">
                                         <span class="text-gray-400">{{$quiz['author']}}</span>
-                                        <a href="#{{$quiz['id']}}" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
+                                        @if(Auth::user())
+                                            @if(Auth::user()->role=="user")
+                                        <a href="/user/quiz/{{Auth::user()->id}}/{{$quiz['id']}}" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
                                             <i class="fa-solid fa-arrow-right-long "></i>
                                         </a>
+                                            @endif
+                                            @if(Auth::user()->role=="admin")
+                                        <a style="display:none" href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
+                                            <i class="fa-solid fa-arrow-right-long "></i>
+                                        </a >
+                                            @endif
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach
@@ -54,173 +62,6 @@
             </ul>
         </div>
     @endforeach
-
-    {{-- <div class="p-6 ">
-        <ul class="flex flex-col gap-3 bg-gray-800 p-5 rounded-2xl">
-            <li>
-
-            </li>
-            <li>
-                <div class="text-center">
-                    <span class="text-3xl"> English </span>
-                </div>
-                <div>
-                    <ul class="flex flex-wrap gap-5 w-[100%] p-5">
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title english 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title english 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title english 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title english 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="text-center">
-                    <span class="text-3xl"> Computer </span>
-                </div>
-                <div>
-                    <ul class="flex flex-wrap gap-5 w-[100%] p-5">
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title computer 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title computer 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title computer 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title computer 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="text-center">
-                    <span class="text-3xl"> Science </span>
-                </div>
-                <div>
-                    <ul class="flex flex-wrap gap-5 w-[100%] p-5">
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title science 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title science 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title science 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="p-5 bg-gray-700 rounded-xl w-[22%] text-center text-white">
-                            <h2 class="text-lg p-2">title science 1</h2>
-                            <hr class="w-[60%] ml-[20%]">
-                            <p class="leading-6 p-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, cumque!</p>
-                            <div class="p-2 rounded-md flex justify-between">
-                                <span class="text-gray-400">ahmed saad</span>
-                                <a href="#" class="hover:bg-yellow-500 p-1 w-[30%] rounded-md transition duration-300 ease-in-out transform hover:translate-x-5">go
-                                    <i class="fa-solid fa-arrow-right-long "></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div> --}}
 
     <div class="video bg-white">
         <video src="{{asset('videos/91998-631504261_medium.mp4')}}" autoplay controls
