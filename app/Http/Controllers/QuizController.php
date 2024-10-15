@@ -183,8 +183,7 @@ class QuizController extends Controller
 
 
 
-        return view('admin.quiz.show_quizzes', compact('quizzes'));
-    }
+     
 
     public function showQuiz($studentId, $quizId)
     {
@@ -269,4 +268,5 @@ class QuizController extends Controller
         $timeLimit = $quiz->time_limit;
 
 
+}
 }

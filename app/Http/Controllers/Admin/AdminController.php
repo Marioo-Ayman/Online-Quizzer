@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 use App\Models\Topic;
+use APP\Mail\PostMail;
 use function PHPUnit\Framework\returnValue;
 
 class AdminController extends Controller
@@ -206,6 +207,35 @@ class AdminController extends Controller
             $topic_name=Topic::find($topic_id);
             return view('admin.quizzees_with_topic', ['quizes' => $result,"topic_name"=>$topic_name]);
          }
+        
+         // Controller methods
+
+// Display the feedback form
+function feedback_view(){
+    return view("feedback.feedback");
+}
+
+// Handle feedback submission and send the email
+function feedback(Request $request){
+    // Get the admin user
+    $admin = User::where("role", "admin")->first();
+    
+    // Get feedback from the request
+    $feedback = $request->feedback;
+    session(["feedback"=>$feedback]);
+    // Ensure there is an admin user found
+    if ($admin) {
+        // Send email to admin using PostMail
+        Mail::to($admin->email)->send(new \App\Mail\PostMail($feedback));
+        
+        // Redirect to the home page
+        return redirect('/')->withMesage("message","feedback was sent successfully");
+    } else {
+        // Handle case if no admin found
+        return back()->with('error', 'Admin user not found.');
+    }
+}
+
 }
 
 
