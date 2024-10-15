@@ -75,7 +75,7 @@ $src="uploads/".Auth::user()->image;
                     @endif
                 @endif
                 <li class="hover:text-yellow-500">
-                    <a href="#">Contact</a>
+                    <a href="{{route("feedback")}}">Contact</a>
                 </li>
                 <li class="hover:text-yellow-500">
                     <a href="#">About Us</a>

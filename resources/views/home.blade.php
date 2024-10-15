@@ -1,7 +1,7 @@
 @php
     $jsLinks = ['home']; // file name
     $cssLinks = ['home'];
-    $pageTitle = 'test';
+    $pageTitle = 'Home';
 @endphp
 <x-header :cssLinks="$cssLinks" :title="$pageTitle" />
 

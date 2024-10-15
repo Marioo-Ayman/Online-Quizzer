@@ -38,8 +38,8 @@ Route::controller(UserProfileController::class)->prefix("user_profile")->group(f
 require __DIR__ . '/auth.php';
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-Route::get('/feedback', function () {
-    return view('feedback.feedback');})->middleware('auth');
+Route::get('/feedback',[AdminController::class,"feedback_view"])->name("feedback_view");
+Route::post('/feedback',[AdminController::class,"feedback"])->name("feedback");
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/dashboard', function () {

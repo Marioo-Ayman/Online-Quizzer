@@ -37,10 +37,11 @@
             <p class="mb-2">
                 Kindly take a moment to tell us what you think.
             </p>
-            <textarea class="w-full p-2 border border-gray-300 rounded mb-4" rows="4"></textarea>
-            <button class="bg-gray-800 text-white px-4 py-2 rounded">
-                Share my feedback
-            </button>
+            <form action="{{route("feedback")}}" method="post">
+            @csrf
+            <textarea class="w-full p-2 border border-gray-300 rounded mb-4" rows="4" name="feedback"></textarea>
+            <input class="bg-gray-800 text-white px-4 py-2 rounded" type="submit" value="Share your feedback">
+                </form>
         </div>
         <div class="md:w-1/2 md:pl-8 mt-8 md:mt-0">
             <img alt="A vase with yellow flowers on a rustic wooden stool against a white wall" class="rounded-lg"

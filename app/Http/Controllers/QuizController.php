@@ -165,6 +165,7 @@ class QuizController extends Controller
                     }
                 }
             } elseif ($questionData['type'] === 'true_false') {
+
                 foreach (['e', 'f'] as $key) {
                     if (isset($questionData['options'][$key])) {
                         Answer::create([
@@ -181,13 +182,8 @@ class QuizController extends Controller
     }
 
 
-    public function showQuizzes()
-    {
-        // Retrieve all quizzes from the database
-        $quizzes = Quiz::with(['user', 'topic'])->get();
 
-        return view('admin.quiz.show_quizzes', compact('quizzes'));
-    }
+     
 
     public function showQuiz($studentId, $quizId)
     {
@@ -272,6 +268,5 @@ class QuizController extends Controller
         $timeLimit = $quiz->time_limit;
 
 
-        return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
-    }
+}
 }
