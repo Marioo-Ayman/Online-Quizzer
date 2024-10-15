@@ -30,7 +30,6 @@ Route::controller(UserProfileController::class)->prefix("user_profile")->group(f
         Route::get("display_all_quizzes", "display_all_quizzes")->name("display_all_quizzes");
         Route::post("email_edit", "email_edit_function")->name("email_edit_function");
         Route::post('search_quiz_user',"search_quiz_user")->name("search_quiz_user");
-        // Route::post('logout',  'logout')->name('logout');
         Route::delete('delete-account',  'deleteAccount')->name('delete-account');
 
 });
@@ -38,8 +37,10 @@ Route::controller(UserProfileController::class)->prefix("user_profile")->group(f
 
 require __DIR__ . '/auth.php';
 
-Route::view('test', 'test');
-
+///////////////////////////////////////////////////////////////////////////////////////////////
+Route::get('/feedback', function () {
+    return view('feedback.feedback');})->middleware('auth');
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/dashboard', function () {
     return view('admin.index');
@@ -49,7 +50,6 @@ Route::get('admin/profile', [UserProfileController::class,'user_profile_show'])-
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']], function () {
     Route::controller(AdminController::class)->group(function () {
-        // Route::get('dashboard', 'index')->name('admin.dashboard');
         Route::get('logout', 'AdminLogout')->name('admin.logout');
         Route::get('contact', 'contact_to_admin')->name('admin.contact');
         Route::get('all_users', 'getAllUsers')->name('admin.getAllUsers');
@@ -75,7 +75,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']], function 
 
 
 
-// Route::get('/user/show', [UserController::class, 'login'])->middleware('auth')->name('user.show');
 Route::post('/user/login', [UserController::class, 'store'])->middleware('auth')->name('user.login');
 Route::get('/user/logout', [UserController::class, 'logout'])->middleware('auth')->name('user.logout');
 

@@ -10,10 +10,6 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    // public function login(){
-
-    //     return view('user.index');
-    // }
 
     public function store(Request $request){
 
@@ -36,10 +32,6 @@ class UserController extends Controller
             'email'=>['credentail false']
         ]);
 
-        // dd($user);
-    //    Auth::login($user);
-
-    //    return view('user.userDashboard');
     }
 
     public function logout(Request $request){
@@ -51,13 +43,10 @@ class UserController extends Controller
 
         return redirect('/');
 
-        // Auth::logout();
-        // return redirect('/user/show');
     }
 
     protected $fillable = ['question_id', 'answer_text', 'is_correct'];
 
-    // protected $table = 'answers';
 
     public function question()
     {

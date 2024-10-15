@@ -1,5 +1,5 @@
 @php
-    $title = "User profile";
+    $title = "Feed Back";
     $cssLinks = [];  // Your array of CSS links
     $body_classes = "bg-gray-500 flex-col align-center";
 @endphp
