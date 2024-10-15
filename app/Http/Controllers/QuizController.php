@@ -218,7 +218,7 @@ class QuizController extends Controller
 
 
 
-    public function submitQuiz(Request $request, $studentId, $quizId)
+  public function submitQuiz(Request $request, $studentId, $quizId)
     {
         $startTime = session()->get('quiz_start_time');
         $timeLimitInSeconds = $request->input('time_limit') * 60;
@@ -254,6 +254,24 @@ class QuizController extends Controller
             }
         }
 
-        return redirect()->route('quiz.selectForm')->with('success', 'Quiz created successfully!');
+        User_Score::create([
+            'user_id' => $studentId,
+            'quiz_id' => $quizId,
+            'user_score' => $score,
+        ]);
+
+        return redirect()->route('user.quiz.show', [$studentId, $quizId])->with('score', $score);
+    }
+
+    public function retakeQuiz($studentId, $quizId)
+    {
+
+        session()->forget('score');
+        $quiz = Quiz::findOrFail($quizId);
+        $adminId = $quiz->user_id;
+        $timeLimit = $quiz->time_limit;
+
+
+        return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
     }
 }
