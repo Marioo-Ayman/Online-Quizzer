@@ -20,7 +20,7 @@
     </style>
 </head>
 
-<body class="image-background bg-no-repeat"  style="background-image: url('{{ asset('images/auth-bg.jpg') }}');">
+<body class="image-background bg-no-repeat"  style="background-image: url('{{ asset("images/auth-bg.jpg") }}');background-size:cover;">
     <div class="bg-overlay absolute  h-full "></div>
     <div
         {{-- class="wrapper-page  absolute top-0 bottom-0  w-full h-full flex justify-center items-center bg-cover bg-center " style="background-image: url('{{ asset('images/auth-bg.jpg') }}');"> --}}
