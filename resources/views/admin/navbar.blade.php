@@ -114,7 +114,7 @@
                         data-page="messages">
                         <li>
                             <a href="#" class="py-2 px-4 flex items-center hover:bg-gray-50 group">
-                                <img src="uploads/{{ Auth::user()->image }}" alt=""
+                                <img src="../uploads/{{ Auth::user()->image }}" alt=""
                                     class="w-8 h-8 rounded block object-cover align-middle">
                                 <div class="ml-2">
                                     <div
@@ -153,13 +153,11 @@
         </script>
 
         <li class="dropdown ml-3">
-            @php
-            $src= !empty(Auth::user()->image)?Auth::user()->image: "avatar.png"
-            @endphp
+           
             <button type="button" class="dropdown-toggle flex items-center">
                 <div class="flex-shrink-0 w-10 h-10 relative">
                     <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-                        <img class="w-8 h-8 rounded-full" src="uploads/{{$src}}" alt="" />
+                        <img class="w-8 h-8 rounded-full" src="../uploads/{{ Auth::user()->image }}" alt="" />
                         <div
                             class="top-0 left-7 absolute w-3 h-3 bg-lime-400 border-2 border-white rounded-full animate-ping">
                         </div>

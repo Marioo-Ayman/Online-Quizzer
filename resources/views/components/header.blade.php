@@ -27,9 +27,13 @@
     md:px-32 md:py-3
     lg:px-48 lg:py-3
     xl:px-72 xl:py-3">
-
+    @if(Auth::user())
+@php
+$src="uploads/".Auth::user()->image;
+@endphp
+    @endif
             @auth
-                <img src="{{ Auth::user()->image }}" alt="logo" style="width:60px;height:60px;border-radius:50%">
+                <img src="{{asset($src)}}" alt="logo" style="width:60px;height:60px;border-radius:50%">
             @endauth
 
             <a href="{{ url('/') }}"><img src="/images/logo_dark.svg" alt="logo"></a>
@@ -86,7 +90,7 @@
                         class="bg-gray-800 absolute top-6 left-0 min-w-32 p-5 flex-col gap-4 hidden group-hover:flex hover:flex">
                         @foreach ($topics as $topic)
                             <li class="hover:text-yellow-500">
-                                <a href="#">{{ $topic->name }}</a>
+                                <a href="{{route("quizzees_with_topic",$topic->id)}}">{{ $topic->name }}</a>
                             </li>
                         @endforeach
                     </ul>
