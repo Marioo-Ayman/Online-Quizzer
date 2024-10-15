@@ -182,7 +182,13 @@ class QuizController extends Controller
     }
 
 
+    public function showQuizzes()
+    {
+        // Retrieve all quizzes from the database
+        $quizzes = Quiz::with(['user', 'topic'])->get(); // Eager load users and topics for display
 
+        return view('admin.quiz.show_quizzes', compact('quizzes'));
+    }
      
 
     public function showQuiz($studentId, $quizId)
