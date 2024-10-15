@@ -22,10 +22,5 @@ class AdminMiddleware
         }
         return redirect('/')->with("error" , "You do not have admin access.");
 
-        // $user = Auth::user();
-        // if (!$user || !$user->role =="admin") {
-        //    return redirect('/');
-        // }
-        //      return $next($request);
      }
 }

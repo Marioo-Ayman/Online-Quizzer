@@ -10,34 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-
-    //     $topics = Topic::get(['id', 'name']);
-    //     $quizzes = Quiz::select('quizzes.id', 'quizzes.title', 'quizzes.description', 'users.name as author', 'topic_id')
-    //         ->join('users', 'quizzes.user_id', '=', 'users.id')
-    //         ->get();
-
-    //     $topics = $topics->toArray();
-    //     $quizzes = $quizzes->toArray();
-
-    //     $data = [];
-    //     foreach ($topics as &$topic) {
-    //         $topic['quizzes'] = [];
-    //         foreach ($quizzes as $quiz) {
-    //             if ($topic['id'] == $quiz['topic_id']) {
-    //                 $topic['quizzes'][] = $quiz;
-    //             }
-    //         }
-    //     }
-
-    //     return view('home', [
-    //         'topics' => $topics
-    //     ]);
-    // }
+    
     public function index()
     {
 

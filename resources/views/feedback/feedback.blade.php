@@ -50,5 +50,5 @@
                 width="400" />
         </div>
     </div>
-@component("components.footer")
+@component("components.footer") 
 @endcomponent
