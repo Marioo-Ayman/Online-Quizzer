@@ -35,24 +35,42 @@ class QuizController extends Controller
             [
                 'time_limit' => 'required|integer',
                 'number_of_questions' => 'required|integer',
-
-
-                'topic_id' => 'required|exists:topics,id',
-
             ],
             [
                 'time_limit.required' => 'Required time limit!',
                 'number_of_questions.required' => 'Required number of questions!',
                 'user_id.required' => 'Required admin!',
-
-                'topic_id.required' => 'Required topic type!',
             ]
         );
+        if (empty($request->topic_id)) {
+            $request->validate(
+                [
+                    'newTopic' => 'required'
+                ], [
+                    'newTopic.required' => 'Required topic type! (Add or Choose)',
+                ]
+                );
+            $topic = new Topic;
+            $topic->name = $request->newTopic;
+            $topic->save();
+            $topicId = $topic->id;
+        } else {
+            $request->validate(
+                [
+                    'topic_id' => 'required|exists:topics,id',
+                ],
+                [
+                    'topic_id.required' => 'Required topic type! (Add or Choose)',
+                ]
+            );
+            $topicId = $request->topic_id;
+        }
+
         session()->put([
             'time_limit' => $request->time_limit,
             'number_of_questions' => $request->number_of_questions,
             'user_id' => Auth::user()->id,
-            'topic_id' => $request->topic_id,
+            'topic_id' => $topicId,
         ]);
 
         return redirect()->route('admin.quiz.createForm');
@@ -236,24 +254,6 @@ class QuizController extends Controller
             }
         }
 
-        User_Score::create([
-            'user_id' => $studentId,
-            'quiz_id' => $quizId,
-            'user_score' => $score,
-        ]);
-
-        return redirect()->route('user.quiz.show', [$studentId, $quizId])->with('score', $score);
-    }
-
-    public function retakeQuiz($studentId, $quizId)
-    {
-
-        session()->forget('score');
-        $quiz = Quiz::findOrFail($quizId);
-        $adminId = $quiz->user_id;
-        $timeLimit = $quiz->time_limit;
-
-
-        return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
+        return redirect()->route('quiz.selectForm')->with('success', 'Quiz created successfully!');
     }
 }

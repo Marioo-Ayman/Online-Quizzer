@@ -67,7 +67,6 @@ class HomeController extends Controller
         $topics = $topics->toArray();
         $quizzes = $quizzes->toArray();
 
-        $data = [];
         foreach ($topics as &$topic) {
             $topic['quizzes'] = [];
             foreach ($quizzes as $quiz) {
@@ -77,12 +76,11 @@ class HomeController extends Controller
             }
         }
         return view('home', [
-            'topics' => $topics,
-            'quizzes' => $quizzes
+            'topics' => $topics
         ]);
     }
 
- 
+
 
     /**
      * Show the form for creating a new resource.
