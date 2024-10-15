@@ -7,170 +7,10 @@
 -->
 @include('admin.navbar')
 
-{{-- <div class="flex w-full">
-    <div class="w-1/5">
-        @include('admin.sidenav')
-    </div>
-
-    <div class="w-4/5 left-0 right-0 items-center">
-
-        <div class="overflow-x-auto mx-auto items-center text-center">
-            <h1 class="text-center text-4xl  font-bold">show all users</h1>
-            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                <div class="w-6/12 mx-auto bg-orange-300">
-                    <input class="w-full px-2 py-2 rounded border border-lime-500" id="keyword" type="text"
-                        placeholder="search">
-                </div>
-                <thead class="ltr:text-left rtl:text-right">
-
-                    <tr>
-                         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">name </th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">email </th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Title</th>
-                        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 w-14 h-14">Score</th>
-                        <th class="px-4 py-2"></th>
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y text-center divide-gray-200">
-                    @foreach ($users as $user)
-                        <tr>
-                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-
-
-
-                            <td>
-                                <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                    type="button">Quiz Title <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <!-- Dropdown menu -->
-                                <div id="dropdownInformation"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownInformationButton">
-                                        @foreach (explode(',', $user->quiz_titles) as $quizname)
-                                            <li class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                role="menuitem">
-                                                <a href="{{ route('admin.getUser', $user->user_id) }}"
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                    {{ trim($quizname) }} </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            <td>
-
-                            <td>
-                                <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                    type="button">Scores <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <!-- Dropdown menu -->
-                                <div id="dropdownInformation"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownInformationButton">
-                                        @foreach (explode(',', $user->scores) as $score)
-                                            @php $trimmedScore = trim($score); @endphp
-
-                                            <li class="block px-4 py-2 text-sm
-                                @if ($trimmedScore > 90) text-green-600
-                                @elseif ($trimmedScore > 75) text-orange-300
-                                @elseif ($trimmedScore > 50) text-rose-300
-                                @else text-rose-800 @endif hover:bg-gray-100"
-                                                role="menuitem">
-                                                <a href="{{ route('admin.getUser', $user->user_id) }}"
-                                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                    {{ $trimmedScore }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                            <td>
-                                <button class="rounded border-blue-600 px-5 py-3 text-white bg-blue-600 text-center">
-                                    <a href="{{ route('admin.getUser', $user->user_id) }}" class="btn">View</a>
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
-
-
-                </tbody>
-            </table>
-
-        </div>
-        {{-- pagination --}}
-        {{-- <div class="rounded-b-lg border-t w-4/5 mx-auto	 border-gray-200 px-4 py-2">
-            <ol class="flex justify-end gap-1 text-xs font-medium">
-                <li>
-                    <a href="#"
-                        class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
-                        <span class="sr-only">Prev Page</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#"
-                        class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
-                        1
-                    </a>
-                </li>
-
-                <li class="block size-8 rounded border-blue-600 bg-blue-600 text-center leading-8 text-white">
-                    2
-                </li>
-
-                <li>
-                    <a href="#"
-                        class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
-                        3
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#"
-                        class="block size-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900">
-                        4
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#"
-                        class="inline-flex size-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180">
-                        <span class="sr-only">Next Page</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </li>
-            </ol>
-        </div> --}}
-    </div>
-
     <script>
         $('#keyword').keyup(function() {
             let keyword = $(this).val()
-            // console.log(keyword);
-            // console.log("{{ route('admin.getAllUsers.search') }}"+"?keyword" + keyword);
+
 
             // processing ajax request
             $.ajax({
@@ -178,12 +18,7 @@
                 type: 'get',
                 contentType: false,
                 processData: false,
-                // dataType: "json",
-                // data: {
-                //     name: name,
-                //     email: email,
-                //     role: role
-                // },
+            
                 success: function(data) {
 
                     for (user of data) {
@@ -288,14 +123,7 @@
                                             </div>
                                         </th>
 
-                                        {{-- <th scope="col" class="px-6 py-3 text-start">
-                                            <div class="flex items-center gap-x-2">
-                                                <span
-                                                    class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
-                                                    Created
-                                                </span>
-                                            </div>
-                                        </th> --}}
+
 
                                         <th scope="col" class="px-6 py-3 text-end"></th>
                                     </tr>
@@ -388,27 +216,7 @@
                                                     </span>
                                                 </div>
                                             </td>
-                                            {{-- <td class="size-px whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span
-                                                        class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                                                        <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg"
-                                                            width="16" height="16" fill="currentColor"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                                        </svg>
-                                                        Active
-                                                    </span>
-                                                </div>
-                                            </td> --}}
 
-                                            {{-- <td class="size-px whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span
-                                                        class="text-sm text-gray-500 dark:text-neutral-500">44-45-2021</span>
-                                                 </div>
-                                            </td> --}}
                                             <td class="size-px whitespace-nowrap">
                                                 <div class="px-6 py-1.5">
                                                     <a class="inline-flex items-center gap-x-1 text-sm  decoration-2 hover:underline focus:outline-none focus:underline font-medium bg-blue-500 text-white py-3 px-5 border rounded-xl"

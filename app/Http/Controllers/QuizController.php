@@ -272,7 +272,6 @@ class QuizController extends Controller
         $quiz = Quiz::findOrFail($quizId);
         $adminId = $quiz->user_id;
         $timeLimit = $quiz->time_limit;
-
-
-}
+        return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
+    }
 }
