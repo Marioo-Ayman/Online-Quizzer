@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class QuizController extends Controller
 {
@@ -46,10 +47,11 @@ class QuizController extends Controller
             $request->validate(
                 [
                     'newTopic' => 'required'
-                ], [
+                ],
+                [
                     'newTopic.required' => 'Required topic type! (Add or Choose)',
                 ]
-                );
+            );
             $topic = new Topic;
             $topic->name = $request->newTopic;
             $topic->save();
@@ -189,7 +191,7 @@ class QuizController extends Controller
 
         return view('admin.quiz.show_quizzes', compact('quizzes'));
     }
-     
+
 
     public function showQuiz($studentId, $quizId)
     {
@@ -220,7 +222,7 @@ class QuizController extends Controller
 
 
 
-  public function submitQuiz(Request $request, $studentId, $quizId)
+    public function submitQuiz(Request $request, $studentId, $quizId)
     {
         $startTime = session()->get('quiz_start_time');
         $timeLimitInSeconds = $request->input('time_limit') * 60;
@@ -274,4 +276,83 @@ class QuizController extends Controller
         $timeLimit = $quiz->time_limit;
         return view('user.quiz.show', compact('quiz', 'studentId', 'quizId', 'adminId', 'timeLimit'));
     }
+
+    public function editQuizForm($id)
+    {
+
+        $quiz = Quiz::with('questions.questionAnswer')->findOrFail($id);
+
+
+        return view('admin.quiz.edit', compact('quiz'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required',
+            'questions.*.id' => 'required|exists:questions,id',
+            'questions.*.question_text' => 'required|max:255',
+            'questions.*.answers.*.id' => 'required|exists:answers,id',
+            'questions.*.answers.*.answer_text' => 'required|max:255',
+            'questions.*.correct' => 'required',
+            'time_limit' => 'required|integer|min:1',
+        ],
+    [
+
+        'questions.*.correct.required' => 'Correct answers are required',
+    ]);
+
+
+        $quiz = Quiz::findOrFail($id);
+
+
+        $quiz->update($request->only(['title', 'description', 'time_limit']));
+
+
+        foreach ($request->questions as $questionData) {
+            $question = $quiz->questions()->find($questionData['id']);
+
+            if ($question) {
+
+                $question->update(['question_text' => $questionData['question_text']]);
+
+
+                foreach ($questionData['answers'] as $answerData) {
+                    $answer = $question->questionAnswer()->find($answerData['id']);
+                    if ($answer) {
+
+                        $answer->update([
+                            'answer_text' => $answerData['answer_text'],
+                            'is_correct' => $answer->id == $questionData['correct'] ? true : false,
+                        ]);
+                    }
+                }
+            }
+        }
+
+        return redirect()->route('admin.quizzes.show')->with('success', 'Quiz updated successfully!');
+    }
+
+    public function destroy($id)
+{
+
+    $quiz = Quiz::findOrFail($id);
+
+
+    foreach ($quiz->questions as $question) {
+        $question->questionAnswer()->delete();
+    }
+
+
+    $quiz->questions()->delete();
+
+
+    $quiz->delete();
+
+
+    return redirect()->route('admin.quizzes.show')->with('success', 'Quiz deleted successfully!');
+}
+
 }

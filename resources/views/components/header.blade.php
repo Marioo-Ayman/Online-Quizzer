@@ -36,7 +36,7 @@ $src="uploads/".Auth::user()->image;
                 <img src="{{asset($src)}}" alt="logo" style="width:60px;height:60px;border-radius:50%">
             @endauth
 
-            <a href="{{ url('/') }}"><img src="/images/logo_dark.svg" alt="logo"></a>
+            <a href="{{ url('/') }}"><img src="/images/quiz_logo.png" width="100px" height="50px" alt="Quiz logo"></a>
             <div class="min-w-20 flex justify-between md:justify-end">
                 <i class="toogle fa-solid fa-bars text-2xl cursor-pointer md:hidden"></i>
 

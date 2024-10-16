@@ -69,6 +69,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth']], function 
         Route::get('quiz/create', 'createQuizForm')->name('admin.quiz.createForm');
         Route::post('quiz/store', 'store')->name('admin.quiz.store');
         Route::get('quiz/quizzes', 'showQuizzes')->name('admin.quizzes.show');
+
+        Route::get('quiz/{id}/edit', 'editQuizForm')->name('admin.quiz.editForm');
+        Route::put('quiz/{id}/update', 'update')->name('admin.quiz.update');
+
+        Route::delete('quiz/{id}/destroy', 'destroy')->name('admin.quiz.destroy');
     });
 });
 

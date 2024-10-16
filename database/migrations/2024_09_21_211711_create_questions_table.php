@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('quiz_id');
             $table->text('question_text');
+
             $table->timestamps();
 
             $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');

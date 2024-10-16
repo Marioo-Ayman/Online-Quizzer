@@ -5,9 +5,9 @@
             <div class="flex justify-between mb-6">
                 <div>
                     <div class="flex items-center mb-1">
-                         <div class="text-2xl font-semibold">All users</div>
+                         <div class="text-2xl font-semibold">Show Students' Progress</div>
                     </div>
-                    <div class="text-sm font-medium text-gray-400">Users</div>
+
                 </div>
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
@@ -36,10 +36,10 @@
             <div class="flex justify-between mb-4">
                 <div>
                     <div class="flex items-center mb-1">
-                        <div class="text-2xl font-semibold">See Reports</div>
+                        <div class="text-2xl font-semibold">See Reports About Quizzes</div>
 
                     </div>
-                    <div class="text-sm font-medium text-gray-400">about quizes</div>
+
                 </div>
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
@@ -64,6 +64,9 @@
             <a href="{{route("admin.all_quizes")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">View</a>
         </div>
 
+
+
+
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
@@ -71,8 +74,8 @@
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex justify-between mb-6">
                 <div>
-                    <div class="text-2xl font-semibold mb-1">100</div>
-                    <div class="text-sm font-medium text-gray-400">Create quiz</div>
+                    <div class="text-2xl font-semibold mb-1">Create Quiz</div>
+
                 </div>
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
@@ -99,11 +102,17 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+
+
+
+
+
+
+    <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex justify-between mb-6">
                 <div>
-                    <div class="text-2xl font-semibold mb-1">100</div>
-                    <div class="text-sm font-medium text-gray-400">Create quiz</div>
+                    <div class="text-2xl font-semibold mb-1">Manage Quizzes</div>
+
                 </div>
                 <div class="dropdown">
                     <button type="button" class="dropdown-toggle text-gray-400 hover:text-gray-600"><i
@@ -126,10 +135,10 @@
                 </div>
             </div>
             <div class="flex justify-between">
-                <a href="{{route("admin.quizzes.show")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">Show Quizzes</a>
+                <a href="{{route("admin.quizzes.show")}}" class="text-[#f84525] font-medium text-sm hover:text-red-800">Edit or Delete</a>
             </div>
         </div>
 
-    </div>
+        </div>
 
 </div>
